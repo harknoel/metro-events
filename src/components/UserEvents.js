@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import UserNav from "./UserNav";
-import { StyledUserEvents, CardContainer } from "./styles/UserEvents.styled";
-import Container from "./styles/Container.styled";
-import Card from "./Card";
-import CustomModal from "./CustomModal";
 import Event from "./Event";
+import UserNav from "./UserNav";
+import Container from "./styles/Container.styled";
 
 const UserEvents = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +16,13 @@ const UserEvents = () => {
     timeEnded: "12:00 PM",
   };
   return (
-    <Event event={event} open={open} setOpen={setOpen} showButton={true} />
+    <div>
+      <UserNav />
+      <Container>
+        <h1>My Joined Events</h1>
+        <Event event={event} open={open} setOpen={setOpen} showButton={false} />
+      </Container>
+    </div>
   );
 };
 
