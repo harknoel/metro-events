@@ -17,13 +17,13 @@ const UserNav = () => {
           <Logo src="./images/logo.svg" alt=""></Logo>
           <Nav>
             <div>
+              <NavLink to="/userevents">My Events</NavLink>
+            </div>
+            <div>
               <NavLink to="/explore">Explore</NavLink>
             </div>
             <div>
-              <NavLink to="/events">Events</NavLink>
-            </div>
-            <div>
-              <span class="material-symbols-outlined">account_circle</span>
+              <span className="material-symbols-outlined">account_circle</span>
             </div>
           </Nav>
         </Header>
