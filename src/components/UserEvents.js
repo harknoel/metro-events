@@ -20,7 +20,13 @@ const UserEvents = () => {
       <UserNav />
       <Container>
         <h1>My Joined Events</h1>
-        <Event event={event} open={open} setOpen={setOpen} showButton={false} />
+        <Event
+          event={event}
+          open={open}
+          setOpen={setOpen}
+          showJoin={true}
+          showManage={true}
+        />
       </Container>
     </div>
   );

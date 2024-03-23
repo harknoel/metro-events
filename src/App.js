@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import UserEvents from "./components/UserEvents";
 import Explore from "./components/Explore";
+import Manage from "./components/Manage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/userevents" element={<UserEvents />} />
           <Route exact path="/explore" element={<Explore />} />
+          <Route exact path="/manage" element={<Manage />} />
         </Routes>
       </Router>
     </div>

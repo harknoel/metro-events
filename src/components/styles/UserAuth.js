@@ -30,7 +30,6 @@ export const InputEmail = styled.input`
   border: 1px solid #94a6f2;
   border-top-left-radius: ${({ bordertop }) => bordertop || "0px"};
   border-top-right-radius: ${({ bordertop }) => bordertop || "0px"};
-  border-bottom: none;
 `;
 
 export const InputPassword = styled.input`

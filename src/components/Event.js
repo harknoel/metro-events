@@ -3,7 +3,7 @@ import Card from "./Card";
 import CustomModal from "./CustomModal";
 
 const Event = (props) => {
-  const { event, open, setOpen, showButton } = props;
+  const { event, open, setOpen, showJoin, showManage } = props;
 
   return (
     <div>
@@ -14,7 +14,8 @@ const Event = (props) => {
         event={event}
         open={open}
         setOpen={setOpen}
-        showButton={showButton}
+        showJoin={showJoin}
+        showManage={showManage}
       />
     </div>
   );

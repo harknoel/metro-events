@@ -3,9 +3,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { ButtonContainer } from "./styles/Modal.styled";
+import { Link } from "react-router-dom";
 
 const CustomModal = (props) => {
-  const { event, open, setOpen, showButton } = props;
+  const { event, open, setOpen, showJoin, showManage } = props;
 
   const handleClose = () => {
     setOpen(false);
@@ -47,16 +48,32 @@ const CustomModal = (props) => {
           <br />
           <strong>Description:</strong> {event.description}
         </Typography>
-        {showButton && (
+        {showJoin && (
           <ButtonContainer>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ mt: 2 }}
-              onClick={handleClose}
-            >
-              Join
-            </Button>
+            <Link to="/join">
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+                onClick={handleClose}
+              >
+                Join
+              </Button>
+            </Link>
+          </ButtonContainer>
+        )}
+        {showManage && (
+          <ButtonContainer>
+            <Link to="/manage">
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+                onClick={handleClose}
+              >
+                Manage
+              </Button>
+            </Link>
           </ButtonContainer>
         )}
       </Box>

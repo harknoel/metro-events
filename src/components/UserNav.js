@@ -4,10 +4,9 @@ import {
   Logo,
   Nav,
   NavLink,
+  CreateEventButton,
 } from "./styles/UserNav.styled";
-import Button from "./styles/Button.styled";
 import Container from "./styles/Container.styled";
-import { Link } from "react-router-dom";
 
 const UserNav = () => {
   return (
@@ -16,6 +15,9 @@ const UserNav = () => {
         <Header>
           <Logo src="./images/logo.svg" alt=""></Logo>
           <Nav>
+            <div>
+              <CreateEventButton>Create Event</CreateEventButton>
+            </div>
             <div>
               <NavLink to="/userevents">My Events</NavLink>
             </div>

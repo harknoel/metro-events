@@ -20,7 +20,13 @@ const Explore = () => {
       <UserNav />
       <Container>
         <h1>Explore</h1>
-        <Event event={event} open={open} setOpen={setOpen} showButton={true} />
+        <Event
+          event={event}
+          open={open}
+          setOpen={setOpen}
+          showJoin={true}
+          showManage={false}
+        />
       </Container>
     </div>
   );
