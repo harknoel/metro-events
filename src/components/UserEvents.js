@@ -4,6 +4,7 @@ import { StyledUserEvents, CardContainer } from "./styles/UserEvents.styled";
 import Container from "./styles/Container.styled";
 import Card from "./Card";
 import CustomModal from "./CustomModal";
+import Event from "./Event";
 
 const UserEvents = () => {
   const [open, setOpen] = useState(false);
@@ -18,21 +19,7 @@ const UserEvents = () => {
     timeEnded: "12:00 PM",
   };
   return (
-    <StyledUserEvents>
-      <UserNav />
-      <Container>
-        <h1>My Joined Events</h1>
-        <CardContainer>
-          <Card event={event} setOpen={setOpen} />
-        </CardContainer>
-      </Container>
-      <CustomModal
-        event={event}
-        open={open}
-        setOpen={setOpen}
-        showButton={true}
-      />
-    </StyledUserEvents>
+    <Event event={event} open={open} setOpen={setOpen} showButton={true} />
   );
 };
 
