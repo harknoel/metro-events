@@ -10,8 +10,4 @@ export const CardContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
+

@@ -2,14 +2,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { ButtonContainer } from "./styles/UserEvents.styled";
-import React, { useState } from "react";
+import { ButtonContainer } from "./styles/Modal.styled";
 
 const CustomModal = (props) => {
-  const { event, open, setOpen } = props; // Destructure 'open' from props
+  const { event, open, setOpen, showButton } = props;
 
   const handleClose = () => {
-    setOpen(false); // Set 'open' state to false to close the modal
+    setOpen(false);
   };
 
   return (
@@ -48,16 +47,18 @@ const CustomModal = (props) => {
           <br />
           <strong>Description:</strong> {event.description}
         </Typography>
-        <ButtonContainer>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-            onClick={handleClose} // Close modal when button is clicked
-          >
-            Join
-          </Button>
-        </ButtonContainer>
+        {showButton && (
+          <ButtonContainer>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mt: 2 }}
+              onClick={handleClose}
+            >
+              Join
+            </Button>
+          </ButtonContainer>
+        )}
       </Box>
     </Modal>
   );

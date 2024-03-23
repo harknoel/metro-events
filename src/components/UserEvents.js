@@ -26,7 +26,12 @@ const UserEvents = () => {
           <Card event={event} setOpen={setOpen} />
         </CardContainer>
       </Container>
-      <CustomModal event={event} open={open} setOpen={setOpen} />
+      <CustomModal
+        event={event}
+        open={open}
+        setOpen={setOpen}
+        showButton={true}
+      />
     </StyledUserEvents>
   );
 };

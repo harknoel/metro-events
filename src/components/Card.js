@@ -4,10 +4,10 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 const Card = (props) => {
-  const { event, setOpen } = props; // Destructure setOpen from props
+  const { event, setOpen } = props;
 
   const handleOpen = () => {
-    setOpen(true); // Open modal when button is clicked
+    setOpen(true);
   };
 
   return (
@@ -32,8 +32,7 @@ const Card = (props) => {
         <CardActions>
           <Button onClick={handleOpen} size="small">
             Learn More
-          </Button>{" "}
-          {/* Call handleOpen on button click */}
+          </Button>
         </CardActions>
       </StyledCard>
     </div>
