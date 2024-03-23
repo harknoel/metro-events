@@ -27,8 +27,9 @@ export const Form = styled.form`
 export const Input = styled.input`
   padding: 10px;
   width: 90%;
-  padding: 10px
-  border: 1px solid #494a4f;
+  padding: 10px;
+  border: 1px solid #94a6f2;
+  border-radius: 6px;
 `;
 
 export const Button = styled.button`

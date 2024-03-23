@@ -27,7 +27,7 @@ export const Form = styled.form`
 export const InputEmail = styled.input`
   padding: 10px;
   width: 260px;
-  border: 1px solid #494a4f;
+  border: 1px solid #94a6f2;
   border-top-left-radius: ${({ bordertop }) => bordertop || "0px"};
   border-top-right-radius: ${({ bordertop }) => bordertop || "0px"};
   border-bottom: none;
@@ -36,7 +36,7 @@ export const InputEmail = styled.input`
 export const InputPassword = styled.input`
   padding: 10px;
   width: 260px;
-  border: 1px solid #494a4f;
+  border: 1px solid #94a6f2;
   border-bottom-left-radius: ${({ borderbottom }) => borderbottom || "0px"};
   border-bottom-right-radius: ${({ borderbottom }) => borderbottom || "0px"};
 `;
