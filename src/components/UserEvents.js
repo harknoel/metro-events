@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import verifyUser from "../helperFunctions";
 
 const UserEvents = () => {
-  const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(false);
+	const [events, setEvents] = useState();
 
   verifyUser("USER")
 

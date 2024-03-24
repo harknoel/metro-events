@@ -5,7 +5,7 @@ import Fade from "@mui/material/Fade";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const NotificationPopup = (props) => {
-  const { notifications, bindToggle, bindPopper, popupState } = props;
+	const { notifications, bindToggle, bindPopper, popupState } = props;
 
   return (
     <div>
