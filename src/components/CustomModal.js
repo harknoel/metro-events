@@ -9,6 +9,7 @@ import {
 	ModalContainer,
 } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CustomModal = (props) => {
 	const { event, open, setOpen, showJoin, showManage } = props;
@@ -26,6 +27,15 @@ const CustomModal = (props) => {
 		console.log("User Review:", userReview);
 		setUserReview("");
 		setOpen(false);
+	};
+
+	const joinEvent = async () => {
+		const username = localStorage.getItem("username");
+		try {
+			const response = await axios.post(`/users/join/${username}/`);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
