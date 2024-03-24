@@ -1,81 +1,83 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import themeConfig from "./styles/themeConfig";
 import { Link } from "react-router-dom";
 import {
-	StyledUserAuth,
-	Form,
-	InputEmail,
-	InputPassword,
-	Button,
-	Image,
-	Signup,
+  StyledUserAuth,
+  InputEmail,
+  InputPassword,
+  Button,
+  Image,
+  Signup,
 } from "./styles/UserAuth.styled";
 import axios from "axios";
+import { UserContext } from "../App";
 
 const SignIn = () => {
-	const [formData, setFormData] = useState({
-		username: "",
-		password: "",
-	});
+  const { user, setUser } = useContext(UserContext);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
-	};
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
-	const onClickLogin = async () => {
-		try {
-			const response = await axios.post(
-				"/auth/login",
-				{
-					username: formData.username,
-					password: formData.password,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			);
-			console.log(response.data);
-		} catch {}
-	};
-	return (
-		<div>
-			<ThemeProvider theme={themeConfig}>
-				<StyledUserAuth>
-					<Image src="./images/logo.svg" alt="" />
-					<div>
-						<InputEmail
-							type="text"
-							placeholder="username"
-							name="username"
-							onChange={handleChange}
-							required
-						/>
-						<InputPassword
-							type="password"
-							placeholder="password"
-							name="password"
-							onChange={handleChange}
-							required
-						/>
-					</div>
-					<Button onClick={onClickLogin}>SIGN IN</Button>
-					<Signup>
-						<span>
-							<Link to="/signup">Sign up</Link> if you don't have an account
-							yet.
-						</span>
-					</Signup>
-				</StyledUserAuth>
-			</ThemeProvider>
-		</div>
-	);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const onClickLogin = async () => {
+    try {
+      const response = await axios.post(
+        "/auth/login",
+        {
+          username: formData.username,
+          password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      localStorage.setItem(response.data.jwt);
+    } catch {}
+  };
+  return (
+    <div>
+      <ThemeProvider theme={themeConfig}>
+        <StyledUserAuth>
+          <Image src="./images/logo.svg" alt="" />
+          <div>
+            <InputEmail
+              type="text"
+              placeholder="username"
+              name="username"
+              onChange={handleChange}
+              required
+            />
+            <InputPassword
+              type="password"
+              placeholder="password"
+              name="password"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <Button onClick={onClickLogin}>SIGN IN</Button>
+          <Signup>
+            <span>
+              <Link to="/signup">Sign up</Link> if you don't have an account
+              yet.
+            </span>
+          </Signup>
+        </StyledUserAuth>
+      </ThemeProvider>
+    </div>
+  );
 };
 
 export default SignIn;
