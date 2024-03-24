@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Event from "./Event";
 import UserNav from "./UserNav";
 import Container from "./styles/Container.styled";
+import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import verifyUser from "../helperFunctions";
 
 const UserEvents = () => {
   const [open, setOpen] = useState(false);
+
+  verifyUser("USER")
 
   const event = {
     title: "Sample Event",

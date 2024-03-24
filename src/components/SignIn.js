@@ -48,6 +48,7 @@ const SignIn = () => {
       console.log(user);
 
       if (response.data.jwt !== "") {
+        console.log(user.user.authorities[0].authority);
         navigate("/userevents");
       } else {
         alert("Incorrect username or password.");

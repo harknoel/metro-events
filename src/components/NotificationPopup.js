@@ -9,7 +9,7 @@ const NotificationPopup = (props) => {
 
   return (
     <div>
-      <span class="material-symbols-outlined" {...bindToggle(popupState)}>
+      <span className="material-symbols-outlined" {...bindToggle(popupState)}>
         notifications
       </span>
       <Popper {...bindPopper(popupState)} transition>

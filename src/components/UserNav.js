@@ -7,7 +7,7 @@ import {
   CreateEventButton,
 } from "./styles/UserNav.styled";
 import Container from "./styles/Container.styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Popper from "@mui/material/Popper";
 import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
 import Fade from "@mui/material/Fade";
@@ -20,6 +20,7 @@ import { UserContext } from "../App";
 
 const UserNav = () => {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const notifications = [
     { id: 1, message: "Notification 1" },
@@ -79,9 +80,18 @@ const UserNav = () => {
                               maxWidth: 200,
                             }}
                           >
-                            <RedButton onClick={popupState.close}>
-                              Logout
-                            </RedButton>
+                            <a>
+                              <RedButton
+                                onClick={() => {
+                                  setUser(null);
+                                  navigate("/signin");
+                                  console.log(user);
+                                  popupState.close();
+                                }}
+                              >
+                                Logout
+                              </RedButton>
+                            </a>
                           </Paper>
                         </Fade>
                       </ClickAwayListener>
