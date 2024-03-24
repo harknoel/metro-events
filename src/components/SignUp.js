@@ -10,8 +10,10 @@ import {
 	Signup,
 } from "./styles/SignUp.styled";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -22,7 +24,10 @@ const SignUp = () => {
 				email: email,
 				password: password,
 			});
-			console.log(response.data);
+			alert(response.data);
+			if (response.data === "success") {
+				navigate("/signin");
+			}
 		} catch (error) {}
 	};
 	return (
