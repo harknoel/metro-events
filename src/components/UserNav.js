@@ -14,7 +14,9 @@ const UserNav = () => {
     <StyledUserNav>
       <Container>
         <Header>
-          <Logo src="./images/logo.svg" alt=""></Logo>
+          <Link to="/userevents">
+            <Logo src="./images/logo.svg" alt=""></Logo>
+          </Link>
           <Nav>
             <div>
               <Link to="/createevent">

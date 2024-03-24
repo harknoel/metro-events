@@ -14,7 +14,13 @@ const UserEvents = () => {
     description: "This is a sample event description.",
     dateEnded: "2024-03-23",
     timeEnded: "12:00 PM",
+    reviews: [
+      { user: "Alice", comment: "Great event! Enjoyed it a lot." },
+      { user: "Bob", comment: "Excellent organization and venue." },
+      { user: "Charlie", comment: "The event exceeded my expectations." },
+    ],
   };
+
   return (
     <div>
       <UserNav />

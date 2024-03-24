@@ -2,9 +2,9 @@ import React from "react";
 import UserNav from "./UserNav";
 import Container from "./styles/Container.styled";
 import EventCard from "./EventCard";
-import { Typography, Grid } from "@mui/material";
 import { useState } from "react";
-import GuestRequest from "./GuestRequest";
+import { CancelButton } from "./styles/Manage.styled";
+import RequestList from "./RequestList";
 
 const Manage = () => {
   const [guestRequests, setGuestRequests] = useState([
@@ -34,20 +34,9 @@ const Manage = () => {
           timeWillEnd="11:00 PM"
           description="Come join us for a night of celebration and fun!"
         />
-
+        <CancelButton>Cancel Event</CancelButton>
         <h1>Guest</h1>
-        <Grid container spacing={1}>
-          {guestRequests.map((guest) => (
-            <Grid item xs={12} key={guest.id}>
-              <GuestRequest
-                name={guest.name}
-                email={guest.email}
-                onAccept={() => handleAccept(guest.id)}
-                onDecline={() => handleDecline(guest.id)}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <RequestList />
       </Container>
     </div>
   );
