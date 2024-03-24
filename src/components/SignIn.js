@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import themeConfig from "./styles/themeConfig";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   StyledUserAuth,
   InputEmail,
@@ -14,6 +14,7 @@ import axios from "axios";
 import { UserContext } from "../App";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
@@ -43,7 +44,12 @@ const SignIn = () => {
           },
         }
       );
-      localStorage.setItem(response.data.jwt);
+      setUser(response.data);
+      console.log(user);
+
+      if (response.data.jwt !== "") {
+        navigate("/userevents");
+      }
     } catch {}
   };
   return (
