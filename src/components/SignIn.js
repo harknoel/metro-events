@@ -10,7 +10,7 @@ import {
   Button,
   Image,
   Signup,
-} from "./styles/UserAuth";
+} from "./styles/UserAuth.styled";
 
 const SignIn = () => {
   return (

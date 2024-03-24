@@ -11,7 +11,7 @@ const EventCard = ({
 }) => {
   return (
     <div>
-      <h1>Event 1</h1>
+      <h1>{eventName}</h1>
       <Card variant="outlined">
         <CardContent>
           <Typography variant="body1" color="textSecondary" gutterBottom>
