@@ -11,8 +11,28 @@ import {
   Image,
   Signup,
 } from "./styles/UserAuth.styled";
+import axios from "axios";
 
 const SignIn = () => {
+  const onClickLogin = async () => {
+    try {
+      const response = await axios.post(
+        "/login",
+        {
+          username: "normal",
+          password: "normal",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch {}
+  };
+
+  onClickLogin();
   return (
     <div>
       <ThemeProvider theme={themeConfig}>
@@ -21,14 +41,12 @@ const SignIn = () => {
             <Image src="./images/logo.svg" alt="" />
             <div>
               <InputEmail
-                bordertop="6px"
                 type="text"
                 placeholder="email"
                 name="uname"
                 required
               />
               <InputPassword
-                borderbottom="6px"
                 type="password"
                 placeholder="password"
                 name="psw"

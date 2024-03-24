@@ -28,16 +28,16 @@ export const InputEmail = styled.input`
   padding: 10px;
   width: 260px;
   border: 1px solid #94a6f2;
-  border-top-left-radius: ${({ bordertop }) => bordertop || "0px"};
-  border-top-right-radius: ${({ bordertop }) => bordertop || "0px"};
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `;
 
 export const InputPassword = styled.input`
   padding: 10px;
   width: 260px;
   border: 1px solid #94a6f2;
-  border-bottom-left-radius: ${({ borderbottom }) => borderbottom || "0px"};
-  border-bottom-right-radius: ${({ borderbottom }) => borderbottom || "0px"};
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 `;
 export const Button = styled.button`
   padding: 10px;
