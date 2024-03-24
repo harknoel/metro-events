@@ -14,7 +14,13 @@ import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { RedButton } from "./styles/Manage.styled";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import NotificationPopup from "./NotificationPopup";
+
 const UserNav = () => {
+  const notifications = [
+    { id: 1, message: "Notification 1" },
+    { id: 2, message: "Notification 2" },
+  ];
   return (
     <StyledUserNav>
       <Container>
@@ -34,6 +40,16 @@ const UserNav = () => {
             <div>
               <NavLink to="/explore">Explore</NavLink>
             </div>
+            <PopupState variant="popper" popupId="demo-popup-popper">
+              {(popupState) => (
+                <NotificationPopup
+                  notifications={notifications}
+                  bindToggle={bindToggle}
+                  bindPopper={bindPopper}
+                  popupState={popupState}
+                />
+              )}
+            </PopupState>
             <PopupState variant="popper" popupId="demo-popup-popper">
               {(popupState) => (
                 <div>
