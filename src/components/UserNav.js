@@ -15,8 +15,12 @@ import Paper from "@mui/material/Paper";
 import { RedButton } from "./styles/Manage.styled";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationPopup from "./NotificationPopup";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 const UserNav = () => {
+  const { user, setUser } = useContext(UserContext);
+
   const notifications = [
     { id: 1, message: "Notification 1" },
     { id: 2, message: "Notification 2" },
@@ -30,9 +34,15 @@ const UserNav = () => {
           </Link>
           <Nav>
             <div>
-              <Link to="/createevent">
-                <CreateEventButton>Create Event</CreateEventButton>
-              </Link>
+              {user &&
+                user.user &&
+                user.user.authorities &&
+                user.user.authorities.length > 0 &&
+                user.user.authorities[0].authority === "ORGANIZER" && (
+                  <Link to="/createevent">
+                    <CreateEventButton>Create Event</CreateEventButton>
+                  </Link>
+                )}
             </div>
             <div>
               <NavLink to="/userevents">My Events</NavLink>

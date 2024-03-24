@@ -49,6 +49,8 @@ const SignIn = () => {
 
       if (response.data.jwt !== "") {
         navigate("/userevents");
+      } else {
+        alert("Incorrect username or password.");
       }
     } catch {}
   };
