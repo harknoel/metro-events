@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CancelButton = styled.button`
+export const RedButton = styled.button`
   background-color: #f44336;
   color: white;
   border: none;

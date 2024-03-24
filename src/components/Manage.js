@@ -3,7 +3,7 @@ import UserNav from "./UserNav";
 import Container from "./styles/Container.styled";
 import EventCard from "./EventCard";
 import { useState } from "react";
-import { CancelButton } from "./styles/Manage.styled";
+import { RedButton } from "./styles/Manage.styled";
 import RequestList from "./RequestList";
 
 const Manage = () => {
@@ -34,7 +34,7 @@ const Manage = () => {
           timeWillEnd="11:00 PM"
           description="Come join us for a night of celebration and fun!"
         />
-        <CancelButton>Cancel Event</CancelButton>
+        <RedButton>Cancel Event</RedButton>
         <h1>Guest</h1>
         <RequestList />
       </Container>

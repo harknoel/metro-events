@@ -8,7 +8,12 @@ import {
 } from "./styles/UserNav.styled";
 import Container from "./styles/Container.styled";
 import { Link } from "react-router-dom";
-
+import Popper from "@mui/material/Popper";
+import PopupState, { bindToggle, bindPopper } from "material-ui-popup-state";
+import Fade from "@mui/material/Fade";
+import Paper from "@mui/material/Paper";
+import { RedButton } from "./styles/Manage.styled";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 const UserNav = () => {
   return (
     <StyledUserNav>
@@ -29,9 +34,36 @@ const UserNav = () => {
             <div>
               <NavLink to="/explore">Explore</NavLink>
             </div>
-            <div>
-              <span className="material-symbols-outlined">account_circle</span>
-            </div>
+            <PopupState variant="popper" popupId="demo-popup-popper">
+              {(popupState) => (
+                <div>
+                  <span
+                    className="material-symbols-outlined"
+                    {...bindToggle(popupState)}
+                  >
+                    account_circle
+                  </span>
+                  <Popper {...bindPopper(popupState)} transition>
+                    {({ TransitionProps }) => (
+                      <ClickAwayListener onClickAway={popupState.close}>
+                        <Fade {...TransitionProps} timeout={350}>
+                          <Paper
+                            sx={{
+                              p: 2,
+                              maxWidth: 200,
+                            }}
+                          >
+                            <RedButton onClick={popupState.close}>
+                              Logout
+                            </RedButton>
+                          </Paper>
+                        </Fade>
+                      </ClickAwayListener>
+                    )}
+                  </Popper>
+                </div>
+              )}
+            </PopupState>
           </Nav>
         </Header>
       </Container>
