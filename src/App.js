@@ -6,6 +6,7 @@ import UserEvents from "./components/UserEvents";
 import Explore from "./components/Explore";
 import Manage from "./components/Manage";
 import CreateEvent from "./components/CreateEvent";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/explore" element={<Explore />} />
           <Route exact path="/manage" element={<Manage />} />
           <Route exact path="/createevent" element={<CreateEvent />} />
+          <Route exact path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </div>

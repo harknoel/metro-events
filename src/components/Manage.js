@@ -2,29 +2,19 @@ import React from "react";
 import UserNav from "./UserNav";
 import Container from "./styles/Container.styled";
 import EventCard from "./EventCard";
-import { useState } from "react";
 import { RedButton } from "./styles/Manage.styled";
 import RequestList from "./RequestList";
 
 const Manage = () => {
-  const [guestRequests, setGuestRequests] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com" },
-  ]);
+  const requests = [
+    { id: 1, user: "Guest 1" },
+    { id: 2, user: "Guest 2" },
+    { id: 3, user: "Guest 3" },
+  ];
 
-  const handleAccept = (id) => {
-    console.log(`Accepted guest request with id ${id}`);
-    setGuestRequests(guestRequests.filter((guest) => guest.id !== id));
-  };
-
-  const handleDecline = (id) => {
-    console.log(`Declined guest request with id ${id}`);
-    setGuestRequests(guestRequests.filter((guest) => guest.id !== id));
-  };
   return (
     <div>
       <UserNav />
-      <Container></Container>
       <Container>
         <EventCard
           eventName="Birthday Party"
@@ -36,7 +26,7 @@ const Manage = () => {
         />
         <RedButton>Cancel Event</RedButton>
         <h1>Guest</h1>
-        <RequestList />
+        <RequestList requests={requests} />
       </Container>
     </div>
   );

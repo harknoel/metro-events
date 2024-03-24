@@ -15,11 +15,7 @@ const style = {
   backgroundColor: "background.paper",
 };
 
-const requests = [
-  { id: 1, user: "Guest 1" },
-  { id: 2, user: "Guest 2" },
-  { id: 3, user: "Guest 3" },
-];
+
 
 const handleAccept = (id) => {
   // Handle accepting the request with the given id
@@ -29,7 +25,9 @@ const handleDecline = (id) => {
   // Handle declining the request with the given id
 };
 
-const RequestList = () => {
+const RequestList = (props) => {
+  const { requests } = props;
+
   return (
     <List sx={style} aria-label="guest requests">
       {requests.map((request) => (
