@@ -59,7 +59,7 @@ export default function CreateEvent() {
                             label="Date Started"
                             value={dateStarted}
                             onChange={(newValue) => setDateStarted(newValue)}
-                            renderInput={(params) => <TextField {...params} />}
+                            TextField={(params) => <TextField {...params} />}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -68,7 +68,7 @@ export default function CreateEvent() {
                             label="Time Started"
                             value={timeStarted}
                             onChange={(newValue) => setTimeStarted(newValue)}
-                            renderInput={(params) => <TextField {...params} />}
+                            TextField={(params) => <TextField {...params} />}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -77,7 +77,7 @@ export default function CreateEvent() {
                             label="Date Will End"
                             value={dateWillEnd}
                             onChange={(newValue) => setDateWillEnd(newValue)}
-                            renderInput={(params) => <TextField {...params} />}
+                            TextField={(params) => <TextField {...params} />}
                           />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -86,7 +86,7 @@ export default function CreateEvent() {
                             label="Time Will End"
                             value={timeWillEnd}
                             onChange={(newValue) => setTimeWillEnd(newValue)}
-                            renderInput={(params) => <TextField {...params} />}
+                            TextField={(params) => <TextField {...params} />}
                           />
                         </Grid>
                       </Grid>
