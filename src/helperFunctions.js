@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./App";
 
-const VerifyUser = (user_type) => {
+const verifyUser = (user_type) => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -13,4 +13,4 @@ const VerifyUser = (user_type) => {
   }, [user, user_type, navigate]);
 };
 
-export default VerifyUser;
+export default verifyUser;
