@@ -18,9 +18,7 @@ const Hero = () => {
               and engage.
             </p>
             <div>
-              <Button bg="#000" fw="700">
-                Create an Event
-              </Button>
+              <Button>Create an Event</Button>
             </div>
           </Text>
           <Image>

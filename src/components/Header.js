@@ -10,7 +10,7 @@ const Header = () => {
         <Nav>
           <Logo src="./images/logo.svg" alt=""></Logo>
           <Link to="/signin">
-            <Button>Sign in</Button>
+            <Button style={{ backgroundColor: "#6462f1" }}>Sign in</Button>
           </Link>
         </Nav>
       </Container>
