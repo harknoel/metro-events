@@ -2,10 +2,8 @@ import React from "react";
 import AdminNav from "./AdminNav";
 import Container from "./styles/Container.styled";
 import AdminUserRequest from "./AdminUserRequest";
-import verifyUser from "../helperFunctions";
 
 const Admin = () => {
-  verifyUser("ADMIN");
   return (
     <div>
       <AdminNav />

@@ -16,7 +16,6 @@ import {
 import Container from "./styles/Container.styled";
 import UserNav from "./UserNav";
 import { Content } from "./styles/CreateEvent.styled";
-import verifyUser from "../helperFunctions";
 
 export default function CreateEvent() {
   const [eventName, setEventName] = React.useState("");
@@ -25,8 +24,6 @@ export default function CreateEvent() {
   const [timeStarted, setTimeStarted] = React.useState(null);
   const [timeWillEnd, setTimeWillEnd] = React.useState(null);
   const [description, setDescription] = React.useState("");
-
-  verifyUser("ORGANIZER");
 
   const handleSubmit = (event) => {
     event.preventDefault();
