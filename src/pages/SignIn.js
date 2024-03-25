@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import themeConfig from "../components/styles/themeConfig";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,11 +12,9 @@ import {
 	InputContainer,
 } from "../components/styles/UserAuth.styled";
 import axios from "axios";
-import { UserContext } from "../App";
 
 const SignIn = () => {
 	const navigate = useNavigate();
-	const { user, setUser } = useContext(UserContext);
 
 	const [formData, setFormData] = useState({
 		username: "",
@@ -34,7 +32,7 @@ const SignIn = () => {
 	const onClickLogin = async () => {
 		try {
 			const response = await axios.post(
-				"/auth/login",
+				"http://localhost:8080/api/v1/auth/login",
 				{
 					username: formData.username,
 					password: formData.password,
@@ -45,11 +43,8 @@ const SignIn = () => {
 					},
 				}
 			);
-			setUser(response.data);
-			console.log(user);
 
 			if (response.data.jwt !== "") {
-				localStorage.setItem("username", response.data.user.username);
 				localStorage.setItem("token", response.data.jwt);
 				navigate("/userevents");
 			} else {

@@ -1,68 +1,53 @@
 import Event from "./Event";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
-import { UserContext } from "../App";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CardContainer } from "../components/styles/UserEvents.styled";
 
 const Explore = () => {
-  const [open, setOpen] = useState(false);
-  const { user, setUser } = useContext(UserContext);
-  const [events, setEvents] = useState();
+	const [open, setOpen] = useState(false);
+	const [events, setEvents] = useState();
 
-  let role = null;
-  if (user !== null) {
-    role = user.user.authorities[0].authority;
-  }
+	console.log(localStorage.getItem("username"));
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
-      navigate("/signin");
-    }
-  }, [user, navigate]);
+	const getAllEvent = async () => {
+		try {
+			const response = await axios.get("/users/allEvents");
+			setEvents(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		console.log(events);
+	}, [events]);
 
-  console.log(localStorage.getItem("username"));
+	useEffect(() => {
+		getAllEvent();
+	}, []);
 
-  const getAllEvent = async () => {
-    try {
-      const response = await axios.get("/users/allEvents");
-      setEvents(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
-
-  useEffect(() => {
-    getAllEvent();
-  }, []);
-
-  return (
-    <div>
-      <UserNav />
-      <Container>
-        <h1>Explore</h1>
-        <CardContainer>
-          {events &&
-            events.map((event) => (
-              <Event
-                key={event.eventId}
-                event={event}
-                open={open}
-                setOpen={setOpen}
-                showJoin={true}
-                showManage={true}
-              />
-            ))}
-        </CardContainer>
-      </Container>
-    </div>
-  );
+	return (
+		<div>
+			<UserNav />
+			<Container>
+				<h1>Explore</h1>
+				<CardContainer>
+					{events &&
+						events.map((event) => (
+							<Event
+								key={event.eventId}
+								event={event}
+								open={open}
+								setOpen={setOpen}
+								showJoin={true}
+								showManage={true}
+							/>
+						))}
+				</CardContainer>
+			</Container>
+		</div>
+	);
 };
 
 export default Explore;

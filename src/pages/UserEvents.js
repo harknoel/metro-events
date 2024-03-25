@@ -1,34 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Event from "./Event";
 import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
-import axios from "axios";
-import { UserContext } from "../App";
-import { useNavigate } from "react-router-dom";
 import { CardContainer } from "../components/styles/UserEvents.styled";
+import axios from "axios";
 
 const UserEvents = () => {
 	const [open, setOpen] = useState(false);
 	const [events, setEvents] = useState();
-	const { user, setUser } = useContext(UserContext);
-
-	let role = null;
-	if (user !== null) {
-		role = user.user.authorities[0].authority;
-	}
-
-	const navigate = useNavigate();
-	useEffect(() => {
-		if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
-			navigate("/signin");
-		}
-	}, [user, navigate, role]);
 
 	console.log(localStorage.getItem("username"));
 
 	const getAllEvent = async () => {
 		try {
 			const token = localStorage.getItem("token");
+			console.log("hello");
 
 			const response = await axios.get("/users/allEvents", {
 				headers: {
