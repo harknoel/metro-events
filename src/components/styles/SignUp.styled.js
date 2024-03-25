@@ -12,7 +12,7 @@ export const StyledUserAuth = styled.div`
   }
 `;
 
-export const Form = styled.form`
+export const InputContainer = styled.form`
   padding-top: 50px;
   width: 800px;
   height: 400px;
