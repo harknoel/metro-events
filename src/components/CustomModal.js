@@ -109,6 +109,10 @@ const CustomModal = (props) => {
 										{event.title}
 									</Typography>
 									<Typography variant="body1">
+										<strong>Organizer:</strong>{" "}
+										<span style={{ color: "blue" }}>{event.owner}</span>
+									</Typography>
+									<Typography variant="body1">
 										<strong>Date Started:</strong> {event.dateStart}
 									</Typography>
 									<Typography variant="body1">
@@ -163,7 +167,7 @@ const CustomModal = (props) => {
 						</ContentContainer>
 						<Card
 							variant="outlined"
-							sx={{ mt: 3, maxWidth: 900, height: 150, boxShadow: 4 }}
+							sx={{ mt: 3, maxWidth: 900, boxShadow: 4 }}
 						>
 							<CardContent>
 								<Typography variant="h6" component="div" gutterBottom>
