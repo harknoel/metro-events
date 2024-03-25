@@ -17,7 +17,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationPopup from "./NotificationPopup";
 import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import PopperTicket from "./PopperTicket";
 
 const UserNav = () => {
 	const navigate = useNavigate();
@@ -59,9 +59,17 @@ const UserNav = () => {
 								/>
 							)}
 						</PopupState>
-						<div>
-							<ConfirmationNumberIcon style={{ color: "#6462F1" }} />
-						</div>
+
+						<PopupState variant="popper" popupId="demo-popup-popper">
+							{(popupState) => (
+								<PopperTicket
+									bindToggle={bindToggle}
+									bindPopper={bindPopper}
+									popupState={popupState}
+								/>
+							)}
+						</PopupState>
+
 						<PopupState variant="popper" popupId="demo-popup-popper">
 							{(popupState) => (
 								<div>
