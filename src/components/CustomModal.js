@@ -47,6 +47,10 @@ const CustomModal = (props) => {
 	};
 
 	const handleSubmit = () => {
+		if (!userReview.trim()) {
+			alert("Invalid comment.");
+			return;
+		}
 		addUserReview();
 	};
 
