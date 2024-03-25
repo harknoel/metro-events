@@ -31,7 +31,7 @@ const UserNav = () => {
 			<Container>
 				<Header>
 					<Link to="/userevents">
-						<Logo src="./images/logo.svg" alt=""></Logo>
+						<Logo src="../images/logo.svg" alt=""></Logo>
 					</Link>
 					<Nav>
 						<div>

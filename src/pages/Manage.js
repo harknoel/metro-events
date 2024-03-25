@@ -5,7 +5,7 @@ import EventCard from "../components/EventCard";
 import { RedButton } from "../components/styles/Manage.styled";
 import RequestList from "../components/RequestList";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 
 const Manage = () => {
 	let { eventId } = useParams();
@@ -42,7 +42,9 @@ const Manage = () => {
 
 	const getEventDetails = async () => {
 		try {
-			const response = await axios.get(`organizers/event/details/${eventId}`);
+			const response = await axiosInstance.get(
+				`organizers/event/details/${eventId}`
+			);
 			setDetails(response.data);
 		} catch (error) {}
 	};
