@@ -37,20 +37,20 @@ const Manage = () => {
 		setTimeEnd(result.timeEnd);
 		setTimeStart(result.timeStart);
 		setTitle(result.title);
-	};
-
-	const getEventDetails = async () => {
-		try {
-			const response = await axiosInstance.get(
-				`organizers/event/details/${eventId}`
-			);
-			setDetails(response.data);
-		} catch (error) {}
+		console.log(participants);
 	};
 
 	useEffect(() => {
+		const getEventDetails = async () => {
+			try {
+				const response = await axiosInstance.get(
+					`organizers/event/details/${eventId}`
+				);
+				setDetails(response.data);
+			} catch (error) {}
+		};
 		getEventDetails();
-	});
+	}, [eventId]);
 
 	const acceptRequest = async (id) => {
 		try {
@@ -58,7 +58,9 @@ const Manage = () => {
 				eventId: eventId,
 				participantId: id,
 			});
-			console.log(response.data);
+			setParticipantList(
+				response.data.filter((partcipant) => partcipant.status === 0)
+			);
 		} catch (error) {
 			console.log(error);
 		}
@@ -70,7 +72,9 @@ const Manage = () => {
 				eventId: eventId,
 				participantId: id,
 			});
-			console.log(response.data);
+			setParticipantList(
+				response.data.filter((partcipant) => partcipant.status === 0)
+			);
 		} catch (error) {
 			console.log(error);
 		}

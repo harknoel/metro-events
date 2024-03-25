@@ -67,14 +67,14 @@ const RequestList = (props) => {
 										<Button
 											size="small"
 											color="primary"
-											onClick={() => handleAccept(index)}
+											onClick={() => handleAccept(request.id)}
 										>
 											Accept
 										</Button>
 										<Button
 											size="small"
 											color="error"
-											onClick={() => handleDecline(index)}
+											onClick={() => handleDecline(request.id)}
 										>
 											Decline
 										</Button>
