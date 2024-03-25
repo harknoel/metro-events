@@ -18,7 +18,8 @@ const UserEvents = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (user == null || role !== "USER") {
+    if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
+      console.log("test");
       navigate("/signin");
     }
   }, [user, navigate]);
