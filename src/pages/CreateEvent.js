@@ -52,16 +52,35 @@ export default function CreateEvent() {
 		setDescription("");
 	};
 
+	function formatTime(timeString) {
+		const date = new Date(timeString);
+		return date.toLocaleTimeString("en-US", {
+			hour12: true,
+			hour: "numeric",
+			minute: "2-digit",
+		});
+	}
+
+	function formatDate(dateString) {
+		const date = new Date(dateString);
+		const month = date.getMonth() + 1;
+		const day = date.getDate();
+		const year = date.getFullYear();
+		return `${month.toString().padStart(2, "0")}/${day
+			.toString()
+			.padStart(2, "0")}/${year}`;
+	}
+
 	const createEvent = async () => {
 		const username = localStorage.getItem("username");
 		try {
 			await axiosInstance.post("/organizers/create/event", {
 				owner: username,
 				title: eventName,
-				timeStart: timeStarted,
-				timeEnd: timeWillEnd,
-				dateStart: dateStarted,
-				dateEnd: dateWillEnd,
+				timeStart: formatTime(timeStarted),
+				timeEnd: formatTime(timeWillEnd),
+				dateStart: formatDate(dateStarted),
+				dateEnd: formatDate(dateWillEnd),
 				description: description,
 			});
 			alert("Successfully created event.");
