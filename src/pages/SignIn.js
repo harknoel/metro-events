@@ -29,7 +29,8 @@ const SignIn = () => {
 		}));
 	};
 
-	const onClickLogin = async () => {
+	const onClickLogin = async (event) => {
+		event.preventDefault();
 		try {
 			const response = await axios.post(
 				"http://localhost:8080/api/v1/auth/login",
@@ -57,32 +58,34 @@ const SignIn = () => {
 		<div>
 			<ThemeProvider theme={themeConfig}>
 				<StyledUserAuth>
-					<InputContainer>
-						<Image src="./images/logo.svg" alt="" />
-						<div>
-							<InputEmail
-								type="text"
-								placeholder="username"
-								name="username"
-								onChange={handleChange}
-								required
-							/>
-							<InputPassword
-								type="password"
-								placeholder="password"
-								name="password"
-								onChange={handleChange}
-								required
-							/>
-						</div>
-						<Button onClick={onClickLogin}>SIGN IN</Button>
-						<Signup>
-							<span>
-								<Link to="/signup">Sign up</Link> if you don't have an account
-								yet.
-							</span>
-						</Signup>
-					</InputContainer>
+					<form onSubmit={onClickLogin}>
+						<InputContainer>
+							<Image src="./images/logo.svg" alt="" />
+							<div>
+								<InputEmail
+									type="text"
+									placeholder="username"
+									name="username"
+									onChange={handleChange}
+									required
+								/>
+								<InputPassword
+									type="password"
+									placeholder="password"
+									name="password"
+									onChange={handleChange}
+									required
+								/>
+							</div>
+							<Button type="submit">SIGN IN</Button>
+							<Signup>
+								<span>
+									<Link to="/signup">Sign up</Link> if you don't have an account
+									yet.
+								</span>
+							</Signup>
+						</InputContainer>
+					</form>
 				</StyledUserAuth>
 			</ThemeProvider>
 		</div>
