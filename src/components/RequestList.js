@@ -4,7 +4,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
-import axiosInstance from "../config/axiosInstance";
 
 const style = {
 	p: 0,
@@ -17,39 +16,16 @@ const style = {
 };
 
 const RequestList = (props) => {
-	const { requests, eventId } = props;
-
-	const acceptParticipant = async (id) => {
-		try {
-			const response = await axiosInstance.post("/organizers/accept", {
-				eventId: eventId,
-				participantId: id,
-			});
-			console.log(response.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const declineParticipant = async (id) => {
-		try {
-			const response = await axiosInstance.post("/organizers/decline", {
-				eventId: eventId,
-				participantId: id,
-			});
-			console.log(response.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	const { requests, acceptRequest, declineRequest } = props;
 
 	const handleAccept = (id) => {
-		acceptParticipant(id);
+		acceptRequest(id);
 	};
 
 	const handleDecline = (id) => {
-		declineParticipant(id);
+		declineRequest(id);
 	};
+
 	return (
 		<List sx={style} aria-label="guest requests">
 			{requests.map(

@@ -9,11 +9,7 @@ import axiosInstance from "../config/axiosInstance";
 
 const Manage = () => {
 	let { eventId } = useParams();
-	const requests = [
-		{ id: 1, user: "Guest 1" },
-		{ id: 2, user: "Guest 2" },
-		{ id: 3, user: "Guest 3" },
-	];
+
 	const [active, setActive] = useState(true);
 	const [dateEnd, setDateEnd] = useState("");
 	const [dateStart, setDateStart] = useState("");
@@ -53,6 +49,30 @@ const Manage = () => {
 		getEventDetails();
 	});
 
+	const acceptRequest = async (id) => {
+		try {
+			const response = await axiosInstance.post("/organizers/accept", {
+				eventId: eventId,
+				participantId: id,
+			});
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const declineRequest = async (id) => {
+		try {
+			const response = await axiosInstance.post("/organizers/decline", {
+				eventId: eventId,
+				participantId: id,
+			});
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div>
 			<UserNav />
@@ -68,7 +88,11 @@ const Manage = () => {
 				<RedButton>Cancel Event</RedButton>
 
 				<h1>Guest</h1>
-				<RequestList requests={participantList} eventId={eventId} />
+				<RequestList
+					requests={participantList}
+					acceptRequest={acceptRequest}
+					declineRequest={declineRequest}
+				/>
 			</Container>
 		</div>
 	);
