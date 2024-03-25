@@ -102,7 +102,7 @@ const CustomModal = (props) => {
 						)}
 						{showManage && (
 							<ButtonContainer>
-								<Link to="/manage">
+								<Link to={`/manage/${event.eventId}`}>
 									<Button
 										variant="contained"
 										color="primary"
