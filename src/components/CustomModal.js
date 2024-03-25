@@ -32,7 +32,17 @@ const CustomModal = (props) => {
 	const joinEvent = async () => {
 		const username = localStorage.getItem("username");
 		try {
-			const response = await axios.post(`/users/join/${username}/`);
+			const response = await axios.post(
+				`/users/join/${username}/${event.eventId}`
+			);
+			const responseDataString = JSON.stringify(response.data);
+			if (responseDataString === "0") {
+				alert("Failed to request");
+			} else if (responseDataString === "1") {
+				alert("Request to join the event.");
+			} else {
+				alert("You already requested. Waiting for approval...");
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -80,16 +90,14 @@ const CustomModal = (props) => {
 						<br />
 						{showJoin && (
 							<ButtonContainer>
-								<Link to="/join">
-									<Button
-										variant="contained"
-										color="primary"
-										sx={{ mt: 2 }}
-										onClick={handleClose}
-									>
-										Join
-									</Button>
-								</Link>
+								<Button
+									variant="contained"
+									color="primary"
+									sx={{ mt: 2 }}
+									onClick={joinEvent}
+								>
+									Join
+								</Button>
 							</ButtonContainer>
 						)}
 						{showManage && (
