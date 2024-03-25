@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CustomModal from "./CustomModal";
-import Card from "./Card";
+import CustomModal from "../components/CustomModal";
+import Card from "../components/Card";
 
 const Event = (props) => {
   const { event, showJoin, showManage } = props;

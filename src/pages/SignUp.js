@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import themeConfig from "./styles/themeConfig";
+import themeConfig from "../components/styles/themeConfig";
 import { Link } from "react-router-dom";
 import {
   StyledUserAuth,
@@ -9,7 +9,7 @@ import {
   Image,
   Signup,
   InputContainer,
-} from "./styles/SignUp.styled";
+} from "../components/styles/SignUp.styled";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
 import Event from "./Event";
-import UserNav from "./UserNav";
-import Container from "./styles/Container.styled";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
+import UserNav from "../components/UserNav";
+import Container from "../components/styles/Container.styled";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { CardContainer } from "./styles/UserEvents.styled";
+import axios from "axios";
+import { CardContainer } from "../components/styles/UserEvents.styled";
 
-const UserEvents = () => {
+const Explore = () => {
   const [open, setOpen] = useState(false);
-  const [events, setEvents] = useState();
   const { user, setUser } = useContext(UserContext);
+  const [events, setEvents] = useState();
 
   let role = null;
   if (user !== null) {
@@ -46,7 +46,7 @@ const UserEvents = () => {
     <div>
       <UserNav />
       <Container>
-        <h1>My Joined Events</h1>
+        <h1>Explore</h1>
         <CardContainer>
           {events &&
             events.map((event) => (
@@ -65,4 +65,4 @@ const UserEvents = () => {
   );
 };
 
-export default UserEvents;
+export default Explore;

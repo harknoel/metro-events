@@ -1,7 +1,7 @@
 import React from "react";
-import AdminNav from "./AdminNav";
-import Container from "./styles/Container.styled";
-import AdminUserRequest from "./AdminUserRequest";
+import AdminNav from "../components/AdminNav";
+import Container from "../components/styles/Container.styled";
+import AdminUserRequest from "../components/AdminUserRequest";
 
 const Admin = () => {
   return (

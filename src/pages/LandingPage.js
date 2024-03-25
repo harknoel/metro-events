@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
-import Header from "./Header";
-import themeConfig from "./styles/themeConfig";
-import Hero from "./Hero";
+import Header from "../components/Header";
+import themeConfig from "../components/styles/themeConfig";
+import Hero from "../components/Hero";
 
 const LandingPage = () => {
   return (
