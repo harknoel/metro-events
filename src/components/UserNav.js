@@ -18,6 +18,7 @@ import NotificationPopup from "./NotificationPopup";
 import { useContext } from "react";
 import { UserContext } from "../App";
 import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
 const UserNav = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -67,12 +68,10 @@ const UserNav = () => {
             <PopupState variant="popper" popupId="demo-popup-popper">
               {(popupState) => (
                 <div>
-                  <span
-                    className="material-symbols-outlined"
+                  <PersonIcon
+                    style={{ color: "#6462F1" }}
                     {...bindToggle(popupState)}
-                  >
-                    account_circle
-                  </span>
+                  />
                   <Popper {...bindPopper(popupState)} transition>
                     {({ TransitionProps }) => (
                       <ClickAwayListener onClickAway={popupState.close}>
