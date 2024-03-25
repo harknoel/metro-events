@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
+import { Message } from "./styles/Request.styled";
 
 const style = {
 	p: 0,
@@ -47,39 +48,48 @@ const RequestList = (props) => {
 					</Grid>
 				</Grid>
 			</ListItem>
-			<Divider component="li" />
-			{requests.map(
-				(request) =>
-					request.status === 0 && (
-						<React.Fragment key={request.participantId}>
-							<ListItem>
-								<Grid container spacing={2} alignItems="center">
-									<Grid item xs={10}>
-										<ListItemText primary={request.username} />
-									</Grid>
-									<Grid item xs={2}>
-										<Button
-											size="small"
-											color="primary"
-											onClick={() => handleAccept(request.participantId)}
-										>
-											Accept
-										</Button>
-										<Button
-											size="small"
-											color="error"
-											onClick={() => handleDecline(request.participantId)}
-										>
-											Decline
-										</Button>
-									</Grid>
-								</Grid>
-							</ListItem>
-							{requests.indexOf(request) !== requests.length - 1 && (
-								<Divider component="li" />
-							)}
-						</React.Fragment>
-					)
+			{requests.length === 0 ? (
+				<div>
+					<Divider component="li" />
+					<Message>Request Empty</Message>
+				</div>
+			) : (
+				<>
+					<Divider component="li" />
+					{requests.map(
+						(request) =>
+							request.status === 0 && (
+								<React.Fragment key={request.participantId}>
+									<ListItem>
+										<Grid container spacing={2} alignItems="center">
+											<Grid item xs={10}>
+												<ListItemText primary={request.username} />
+											</Grid>
+											<Grid item xs={2}>
+												<Button
+													size="small"
+													color="primary"
+													onClick={() => handleAccept(request.participantId)}
+												>
+													Accept
+												</Button>
+												<Button
+													size="small"
+													color="error"
+													onClick={() => handleDecline(request.participantId)}
+												>
+													Decline
+												</Button>
+											</Grid>
+										</Grid>
+									</ListItem>
+									{requests.indexOf(request) !== requests.length - 1 && (
+										<Divider component="li" />
+									)}
+								</React.Fragment>
+							)
+					)}
+				</>
 			)}
 		</List>
 	);
