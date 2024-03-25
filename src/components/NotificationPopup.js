@@ -5,6 +5,7 @@ import Fade from "@mui/material/Fade";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { StyledNotificationPopup } from "./styles/NotificationPopup.styled";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+
 const NotificationPopup = (props) => {
   const { notifications, bindToggle, bindPopper, popupState } = props;
 
