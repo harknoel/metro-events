@@ -7,20 +7,36 @@ import Explore from "./pages/Explore";
 import Manage from "./pages/Manage";
 import CreateEvent from "./pages/CreateEvent";
 import Admin from "./pages/Admin";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import PrivateUserRoutes from "./utils/PrivateUserRoutes";
+import PrivateOrganizerRoutes from "./utils/PrivateOrganizerRoutes";
+import PrivateAdminRoutes from "./utils/PrivateAdminRoutes";
+import Error from "./pages/Error";
 
 function App() {
 	return (
 		<div>
 			<Router>
 				<Routes>
+					<Route element={<PrivateRoutes />}>
+						<Route path="*" element={<Error />}></Route>
+						<Route element={<PrivateAdminRoutes />}>
+							<Route path="/admin" element={<Admin />} />
+						</Route>
+
+						<Route element={<PrivateUserRoutes />}>
+							<Route exact path="/userevents" element={<UserEvents />} />
+							<Route path="/explore" element={<Explore />} />
+						</Route>
+
+						<Route element={<PrivateOrganizerRoutes />}>
+							<Route path="/manage/:eventId" element={<Manage />} />
+							<Route path="/createevent" element={<CreateEvent />} />
+						</Route>
+					</Route>
 					<Route exact path="/" element={<LandingPage />} />
 					<Route exact path="/signin" element={<SignIn />} />
 					<Route exact path="/signup" element={<SignUp />} />
-					<Route exact path="/userevents" element={<UserEvents />} />
-					<Route exact path="/explore" element={<Explore />} />
-					<Route exact path="/manage/:eventId" element={<Manage />} />
-					<Route exact path="/createevent" element={<CreateEvent />} />
-					<Route exact path="/admin" element={<Admin />} />
 				</Routes>
 			</Router>
 		</div>

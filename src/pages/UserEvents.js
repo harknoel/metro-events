@@ -11,7 +11,9 @@ const UserEvents = () => {
 
 	const getAllEvents = async () => {
 		try {
-			const response = await axiosInstance.get("/users/allEvents");
+			const response = await axiosInstance.get(
+				"http://localhost:8080/api/v1/users/allEvents"
+			);
 			setEvents(response.data);
 		} catch (error) {
 			console.error(error);
@@ -20,7 +22,7 @@ const UserEvents = () => {
 
 	useEffect(() => {
 		getAllEvents();
-	}, []);
+	});
 
 	return (
 		<div>
