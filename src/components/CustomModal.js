@@ -11,10 +11,13 @@ import {
 	ParentContainer,
 	EventContainer,
 	EventDetail,
-	EventName,
 	EventDescription,
+	ParentButtonContainer,
 } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import axiosInstance from "../config/axiosInstance";
 
 const CustomModal = (props) => {
@@ -97,58 +100,70 @@ const CustomModal = (props) => {
 			>
 				<ModalContainer>
 					<ParentContainer>
-						<h1>Event Details</h1>
+						<h4>Event Details</h4>
 						<ContentContainer>
 							<Image src="./images/join-event.svg" />
-							<EventContainer>
-								<EventDetail>
-									<EventName>Event Name:</EventName> {event.title}
-								</EventDetail>
-								<EventDetail>
-									<strong>Date Started:</strong> {event.dateStart}
-								</EventDetail>
-								<EventDetail>
-									<strong>Date Will End:</strong> {event.dateEnd}
-								</EventDetail>
-								<EventDetail>
-									<strong>Time Started:</strong> {event.timeStart}
-								</EventDetail>
-								<EventDetail>
-									<strong>Time Will End:</strong> {event.timeEnd}
-								</EventDetail>
-								<EventDetail>
-									<strong>Description:</strong>
-									<EventDescription>{event.description}</EventDescription>
-								</EventDetail>
-							</EventContainer>
+							<div>
+								<EventContainer>
+									<Typography variant="h3" gutterBottom>
+										{event.title}
+									</Typography>
+									<Typography variant="body1">
+										<strong>Date Started:</strong> {event.dateStart}
+									</Typography>
+									<Typography variant="body1">
+										<strong>Date Will End:</strong> {event.dateEnd}
+									</Typography>
+									<Typography variant="body1">
+										<strong>Time Started:</strong> {event.timeStart}
+									</Typography>
+									<Typography variant="body1">
+										<strong>Time Will End:</strong> {event.timeEnd}
+									</Typography>
+									<Typography variant="body1">
+										<strong>Description:</strong>
+									</Typography>
+								</EventContainer>
+								<ParentButtonContainer>
+									{showJoin && (
+										<ButtonContainer>
+											<Button
+												variant="contained"
+												color="primary"
+												sx={{ width: "150px", height: "50px" }}
+												onClick={joinEvent}
+											>
+												Join
+											</Button>
+										</ButtonContainer>
+									)}
+									{showManage && (
+										<ButtonContainer>
+											<Link to={`/manage/${event.eventId}`}>
+												<Button
+													variant="contained"
+													color="primary"
+													sx={{ width: "150px", height: "50px" }}
+													onClick={handleClose}
+												>
+													Manage
+												</Button>
+											</Link>
+										</ButtonContainer>
+									)}
+								</ParentButtonContainer>
+							</div>
 						</ContentContainer>
+						<Card variant="outlined" sx={{ mt: 3, maxWidth: 900, height: 150 }}>
+							<CardContent>
+								<Typography variant="h5" component="div" gutterBottom>
+									Description
+								</Typography>
+								<Typography variant="body1">{event.description}</Typography>
+							</CardContent>
+						</Card>
 					</ParentContainer>
-					{showJoin && (
-						<ButtonContainer>
-							<Button
-								variant="contained"
-								color="primary"
-								sx={{ mt: 2 }}
-								onClick={joinEvent}
-							>
-								Join
-							</Button>
-						</ButtonContainer>
-					)}
-					{showManage && (
-						<ButtonContainer>
-							<Link to={`/manage/${event.eventId}`}>
-								<Button
-									variant="contained"
-									color="primary"
-									sx={{ mt: 2 }}
-									onClick={handleClose}
-								>
-									Manage
-								</Button>
-							</Link>
-						</ButtonContainer>
-					)}
+
 					<StyledInput
 						type="text"
 						placeholder="Write your review here..."

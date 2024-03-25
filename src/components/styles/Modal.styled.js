@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const ButtonContainer = styled.div`
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
 `;
 
@@ -34,23 +33,17 @@ export const ContentContainer = styled.div`
 `;
 
 export const ParentContainer = styled.div`
-	margin: 0px 40px;
+	margin: 0px 50px;
 	display: flex;
 	flex-direction: column;
 `;
 
 export const EventContainer = styled.div`
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 `;
 
-export const EventDetail = styled.div`
-	margin-bottom: 10px;
-`;
-
-export const EventName = styled.strong`
-	color: #333;
-`;
-
-export const EventDescription = styled.div`
-	color: #666;
+export const ParentButtonContainer = styled.div`
+	display: flex;
+	alignitems: center;
+	gap: 10px;
 `;
