@@ -7,6 +7,13 @@ import {
 	ButtonContainer,
 	StyledInput,
 	ModalContainer,
+	Image,
+	ContentContainer,
+	ParentContainer,
+	EventContainer,
+	EventDetail,
+	EventName,
+	EventDescription,
 } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
 import axiosInstance from "../config/axiosInstance";
@@ -71,73 +78,82 @@ const CustomModal = (props) => {
 				}}
 			>
 				<ModalContainer>
-					<Typography id="modal-modal-title" variant="h6" component="h2">
-						Event Details
-					</Typography>
-
-					<Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-						<strong>Event Name:</strong> {event.title}
-						<br />
-						<strong>Date Started:</strong> {event.dateStart}
-						<br />
-						<strong>Date Will End:</strong> {event.dateEnd}
-						<br />
-						<strong>Time Started:</strong> {event.timeStart}
-						<br />
-						<strong>Time Will End:</strong> {event.timeEnd}
-						<br />
-						<strong>Description:</strong> {event.description}
-						<br />
-						{showJoin && (
-							<ButtonContainer>
+					<ParentContainer>
+						<h1>Event Details</h1>
+						<ContentContainer>
+							<Image src="./images/join-event.svg" />
+							<EventContainer>
+								<EventDetail>
+									<EventName>Event Name:</EventName> {event.title}
+								</EventDetail>
+								<EventDetail>
+									<strong>Date Started:</strong> {event.dateStart}
+								</EventDetail>
+								<EventDetail>
+									<strong>Date Will End:</strong> {event.dateEnd}
+								</EventDetail>
+								<EventDetail>
+									<strong>Time Started:</strong> {event.timeStart}
+								</EventDetail>
+								<EventDetail>
+									<strong>Time Will End:</strong> {event.timeEnd}
+								</EventDetail>
+								<EventDetail>
+									<strong>Description:</strong>
+									<EventDescription>{event.description}</EventDescription>
+								</EventDetail>
+							</EventContainer>
+						</ContentContainer>
+					</ParentContainer>
+					{showJoin && (
+						<ButtonContainer>
+							<Button
+								variant="contained"
+								color="primary"
+								sx={{ mt: 2 }}
+								onClick={joinEvent}
+							>
+								Join
+							</Button>
+						</ButtonContainer>
+					)}
+					{showManage && (
+						<ButtonContainer>
+							<Link to={`/manage/${event.eventId}`}>
 								<Button
 									variant="contained"
 									color="primary"
 									sx={{ mt: 2 }}
-									onClick={joinEvent}
+									onClick={handleClose}
 								>
-									Join
+									Manage
 								</Button>
-							</ButtonContainer>
-						)}
-						{showManage && (
-							<ButtonContainer>
-								<Link to={`/manage/${event.eventId}`}>
-									<Button
-										variant="contained"
-										color="primary"
-										sx={{ mt: 2 }}
-										onClick={handleClose}
-									>
-										Manage
-									</Button>
-								</Link>
-							</ButtonContainer>
-						)}
-						<StyledInput
-							type="text"
-							placeholder="Write your review here..."
-							value={userReview}
-							onChange={handleReviewChange}
-						/>
-						<Button
-							sx={{ my: 2 }}
-							variant="contained"
-							color="primary"
-							onClick={handleSubmit}
-						>
-							Submit Review
-						</Button>
-						<br />
-						<strong>User Reviews:</strong>
-						<ul>
-							{event.reviewList.map((review, index) => (
-								<li key={index}>
-									<strong>{review.username}:</strong> {review.comment}
-								</li>
-							))}
-						</ul>
-					</Typography>
+							</Link>
+						</ButtonContainer>
+					)}
+					<StyledInput
+						type="text"
+						placeholder="Write your review here..."
+						value={userReview}
+						onChange={handleReviewChange}
+					/>
+					<Button
+						sx={{ my: 2 }}
+						variant="contained"
+						color="primary"
+						onClick={handleSubmit}
+					>
+						Submit Review
+					</Button>
+					<br />
+					<strong>User Reviews:</strong>
+					<ul>
+						{event.reviewList.map((review, index) => (
+							<li key={index}>
+								<strong>{review.username}:</strong> {review.comment}
+							</li>
+						))}
+					</ul>
 				</ModalContainer>
 			</Box>
 		</Modal>
