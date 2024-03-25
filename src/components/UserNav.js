@@ -1,10 +1,10 @@
 import {
-	StyledUserNav,
-	Header,
-	Logo,
-	Nav,
-	NavLink,
-	CreateEventButton,
+  StyledUserNav,
+  Header,
+  Logo,
+  Nav,
+  NavLink,
+  CreateEventButton,
 } from "./styles/UserNav.styled";
 import Container from "./styles/Container.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,97 +20,103 @@ import PersonIcon from "@mui/icons-material/Person";
 import PopperTicket from "./PopperTicket";
 
 const UserNav = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const notifications = [
-		{ id: 1, message: "Notification 1" },
-		{ id: 2, message: "Notification 2" },
-	];
-	return (
-		<StyledUserNav>
-			<Container>
-				<Header>
-					<Link to="/userevents">
-						<Logo src="../images/logo.svg" alt=""></Logo>
-					</Link>
-					<Nav>
-						<div>
-							<Link to="/createevent" style={{ textDecoration: "none" }}>
-								<CreateEventButton>
-									<AddIcon style={{ color: "white" }} />
-									Create Event
-								</CreateEventButton>
-							</Link>
-						</div>
-						<div>
-							<NavLink to="/userevents">My Events</NavLink>
-						</div>
-						<div>
-							<NavLink to="/explore">Explore</NavLink>
-						</div>
+  const notifications = [
+    { id: 1, message: "Notification 1" },
+    { id: 2, message: "Notification 2" },
+  ];
 
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<NotificationPopup
-									notifications={notifications}
-									bindToggle={bindToggle}
-									bindPopper={bindPopper}
-									popupState={popupState}
-								/>
-							)}
-						</PopupState>
+  const requestRole = [
+    { id: 1, message: "Request to be Admin" },
+    { id: 2, message: "Request to be Organizer" },
+  ];
 
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<PopperTicket
-									bindToggle={bindToggle}
-									bindPopper={bindPopper}
-									popupState={popupState}
-								/>
-							)}
-						</PopupState>
+  return (
+    <StyledUserNav>
+      <Container>
+        <Header>
+          <Link to="/userevents">
+            <Logo src="../images/logo.svg" alt=""></Logo>
+          </Link>
+          <Nav>
+            <div>
+              <Link to="/createevent" style={{ textDecoration: "none" }}>
+                <CreateEventButton>
+                  <AddIcon style={{ color: "white" }} />
+                  Create Event
+                </CreateEventButton>
+              </Link>
+            </div>
+            <div>
+              <NavLink to="/userevents">My Events</NavLink>
+            </div>
+            <div>
+              <NavLink to="/explore">Explore</NavLink>
+            </div>
 
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<div>
-									<PersonIcon
-										style={{ color: "#6462F1" }}
-										{...bindToggle(popupState)}
-									/>
-									<Popper {...bindPopper(popupState)} transition>
-										{({ TransitionProps }) => (
-											<ClickAwayListener onClickAway={popupState.close}>
-												<Fade {...TransitionProps} timeout={350}>
-													<Paper
-														sx={{
-															p: 2,
-															maxWidth: 200,
-														}}
-													>
-														<a>
-															<RedButton
-																onClick={() => {
-																	localStorage.clear();
-																	navigate("/signin");
-																	popupState.close();
-																}}
-															>
-																Logout
-															</RedButton>
-														</a>
-													</Paper>
-												</Fade>
-											</ClickAwayListener>
-										)}
-									</Popper>
-								</div>
-							)}
-						</PopupState>
-					</Nav>
-				</Header>
-			</Container>
-		</StyledUserNav>
-	);
+            <PopupState variant="popper" popupId="demo-popup-popper">
+              {(popupState) => (
+                <NotificationPopup
+                  notifications={notifications}
+                  bindToggle={bindToggle}
+                  bindPopper={bindPopper}
+                  popupState={popupState}
+                />
+              )}
+            </PopupState>
+
+            <PopupState variant="popper" popupId="demo-popup-popper">
+              {(popupState) => (
+                <PopperTicket
+                  bindToggle={bindToggle}
+                  bindPopper={bindPopper}
+                  popupState={popupState}
+                />
+              )}
+            </PopupState>
+
+            <PopupState variant="popper" popupId="demo-popup-popper">
+              {(popupState) => (
+                <div>
+                  <PersonIcon
+                    style={{ color: "#6462F1" }}
+                    {...bindToggle(popupState)}
+                  />
+                  <Popper {...bindPopper(popupState)} transition>
+                    {({ TransitionProps }) => (
+                      <ClickAwayListener onClickAway={popupState.close}>
+                        <Fade {...TransitionProps} timeout={350}>
+                          <Paper
+                            sx={{
+                              p: 2,
+                              maxWidth: 200,
+                            }}
+                          >
+                            <a>
+                              <RedButton
+                                onClick={() => {
+                                  localStorage.clear();
+                                  navigate("/signin");
+                                  popupState.close();
+                                }}
+                              >
+                                Logout
+                              </RedButton>
+                            </a>
+                          </Paper>
+                        </Fade>
+                      </ClickAwayListener>
+                    )}
+                  </Popper>
+                </div>
+              )}
+            </PopupState>
+          </Nav>
+        </Header>
+      </Container>
+    </StyledUserNav>
+  );
 };
 
 export default UserNav;
