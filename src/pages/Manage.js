@@ -23,13 +23,16 @@ const Manage = () => {
 	const [title, setTitle] = useState("");
 
 	const setDetails = (result) => {
+		const participants = result.participantList;
 		setActive(result.active);
 		setDateEnd(result.dateEnd);
 		setDateStart(result.dateStart);
 		setDescription(result.description);
 		setEventDateTimeCreated(result.eventDateTimeCreated);
 		setOwner(result.owner);
-		setParticipantList(result.participantList);
+		setParticipantList(
+			participants.filter((partcipant) => partcipant.status === 0)
+		);
 		setReviewList(result.reviewList);
 		setTimeEnd(result.timeEnd);
 		setTimeStart(result.timeStart);
