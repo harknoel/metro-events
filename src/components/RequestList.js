@@ -10,10 +10,12 @@ const style = {
 	p: 0,
 	width: "100%",
 	maxWidth: "100%",
-	borderRadius: 2,
+	borderRadius: 5,
 	border: "1px solid",
 	borderColor: "divider",
 	backgroundColor: "background.paper",
+	boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+	padding: 1,
 };
 
 const RequestList = (props) => {
@@ -31,18 +33,17 @@ const RequestList = (props) => {
 		<List sx={style} aria-label="guest requests">
 			<ListItem
 				sx={{
-					backgroundColor: "#6462F1",
-					borderTopLeftRadius: "5px",
-					borderTopRightRadius: "5px",
+					borderTopLeftRadius: "10px",
+					borderTopRightRadius: "10px",
 					padding: "10px",
 				}}
 			>
 				<Grid container spacing={2} alignItems="center">
 					<Grid item xs={10}>
-						<ListItemText primary="Name" sx={{ color: "#ffffff" }} />
+						<ListItemText primary="Name" />
 					</Grid>
 					<Grid item xs={2}>
-						<ListItemText primary="Actions" sx={{ color: "#ffffff" }} />
+						<ListItemText primary="Actions" />
 					</Grid>
 				</Grid>
 			</ListItem>
@@ -74,7 +75,9 @@ const RequestList = (props) => {
 									</Grid>
 								</Grid>
 							</ListItem>
-							<Divider component="li" />
+							{requests.indexOf(request) !== requests.length - 1 && (
+								<Divider component="li" />
+							)}
 						</React.Fragment>
 					)
 			)}
