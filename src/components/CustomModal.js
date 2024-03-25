@@ -120,9 +120,6 @@ const CustomModal = (props) => {
 									<Typography variant="body1">
 										<strong>Time Will End:</strong> {event.timeEnd}
 									</Typography>
-									<Typography variant="body1">
-										<strong>Description:</strong>
-									</Typography>
 								</EventContainer>
 								<ParentButtonContainer>
 									{showJoin && (
@@ -130,7 +127,12 @@ const CustomModal = (props) => {
 											<Button
 												variant="contained"
 												color="primary"
-												sx={{ width: "150px", height: "50px" }}
+												sx={{
+													width: "150px",
+													height: "50px",
+													backgroundColor: "#6462F1",
+													"&:hover": { backgroundColor: "#94A6F2" },
+												}}
 												onClick={joinEvent}
 											>
 												Join
@@ -143,7 +145,12 @@ const CustomModal = (props) => {
 												<Button
 													variant="contained"
 													color="primary"
-													sx={{ width: "150px", height: "50px" }}
+													sx={{
+														width: "150px",
+														height: "50px",
+														backgroundColor: "#6462F1",
+														"&:hover": { backgroundColor: "#94A6F2" },
+													}}
 													onClick={handleClose}
 												>
 													Manage
@@ -154,39 +161,49 @@ const CustomModal = (props) => {
 								</ParentButtonContainer>
 							</div>
 						</ContentContainer>
-						<Card variant="outlined" sx={{ mt: 3, maxWidth: 900, height: 150 }}>
+						<Card
+							variant="outlined"
+							sx={{ mt: 3, maxWidth: 900, height: 150, boxShadow: 4 }}
+						>
 							<CardContent>
-								<Typography variant="h5" component="div" gutterBottom>
+								<Typography variant="h6" component="div" gutterBottom>
 									Description
 								</Typography>
 								<Typography variant="body1">{event.description}</Typography>
 							</CardContent>
 						</Card>
+						<Typography variant="h5" sx={{ mt: 3 }}>
+							Review
+						</Typography>
+						<StyledInput
+							type="text"
+							placeholder="Write your review here..."
+							value={userReview}
+							onChange={handleReviewChange}
+						/>
+						<Button
+							sx={{
+								mt: 2,
+								height: "40px",
+								backgroundColor: "#6462F1",
+								"&:hover": { backgroundColor: "#94A6F2" },
+							}}
+							variant="contained"
+							color="primary"
+							onClick={handleSubmit}
+						>
+							Submit Review
+						</Button>
+						<br />
+						<strong>User Reviews:</strong>
+						<ul>
+							{reviews.map((review, index) => (
+								<li key={index}>
+									<strong>{review.username}:</strong> {review.comment}
+								</li>
+							))}
+						</ul>
 					</ParentContainer>
-
-					<StyledInput
-						type="text"
-						placeholder="Write your review here..."
-						value={userReview}
-						onChange={handleReviewChange}
-					/>
-					<Button
-						sx={{ my: 2 }}
-						variant="contained"
-						color="primary"
-						onClick={handleSubmit}
-					>
-						Submit Review
-					</Button>
-					<br />
-					<strong>User Reviews:</strong>
-					<ul>
-						{reviews.map((review, index) => (
-							<li key={index}>
-								<strong>{review.username}:</strong> {review.comment}
-							</li>
-						))}
-					</ul>
 				</ModalContainer>
 			</Box>
 		</Modal>
