@@ -26,12 +26,7 @@ const UserNav = () => {
     { id: 1, message: "Notification 1" },
     { id: 2, message: "Notification 2" },
   ];
-
-  const requestRole = [
-    { id: 1, message: "Request to be Admin" },
-    { id: 2, message: "Request to be Organizer" },
-  ];
-
+ 
   return (
     <StyledUserNav>
       <Container>

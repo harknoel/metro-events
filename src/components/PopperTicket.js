@@ -45,9 +45,9 @@ const PopperTicket = (props) => {
 					<ClickAwayListener onClickAway={popupState.close}>
 						<Fade {...TransitionProps} timeout={350}>
 							<StyledPopperContent>
-								<Container maxWidth="sm">
+								<Container>
 									<Box>
-										<Typography variant="h5" gutterBottom>
+										<Typography variant="h6" gutterBottom>
 											Request to be an organizer.
 										</Typography>
 										<Grid item xs={2}>
