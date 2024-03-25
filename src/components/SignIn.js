@@ -48,6 +48,7 @@ const SignIn = () => {
 			console.log(user);
 
 			if (response.data.jwt !== "") {
+				localStorage.setItem("username", response.data.user.username);
 				console.log(user.user.authorities[0].authority);
 				navigate("/userevents");
 			} else {

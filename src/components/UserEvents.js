@@ -8,8 +8,6 @@ import verifyUser from "../helperFunctions";
 const UserEvents = () => {
 	const [open, setOpen] = useState(false);
 	const [events, setEvents] = useState();
-	const [open, setOpen] = useState(false);
-	const [events, setEvents] = useState();
 
 	verifyUser("USER");
 
@@ -31,25 +29,6 @@ const UserEvents = () => {
 		getAllEvent();
 	}, []);
 
-	return (
-		<div>
-			<UserNav />
-			<Container>
-				<h1>My Joined Events</h1>
-				{events &&
-					events.map((event) => (
-						<Event
-							key={event.eventId}
-							event={event}
-							open={open}
-							setOpen={setOpen}
-							showJoin={true}
-							showManage={true}
-						/>
-					))}
-			</Container>
-		</div>
-	);
 	return (
 		<div>
 			<UserNav />
