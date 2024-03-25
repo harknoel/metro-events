@@ -1,14 +1,8 @@
 import styled from "styled-components";
 
 export const StyledPopperContent = styled.div`
-	background-color: red;
+	padding: 20px 0px;
 	width: 300px;
-`;
-
-export const RequestAdminButton = styled.button`
-	background-color: brown;
-`;
-
-export const RequestOrganizerButton = styled.button`
-	background-color: green;
+	background-color: #ffff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 `;

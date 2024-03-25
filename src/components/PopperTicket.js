@@ -8,6 +8,11 @@ import {
 	RequestOrganizerButton,
 } from "./styles/PopperTicket.styled";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 
 const PopperTicket = (props) => {
 	const { bindToggle, bindPopper, popupState } = props;
@@ -23,8 +28,18 @@ const PopperTicket = (props) => {
 					<ClickAwayListener onClickAway={popupState.close}>
 						<Fade {...TransitionProps} timeout={350}>
 							<StyledPopperContent>
-								<RequestAdminButton>hello world</RequestAdminButton>
-								<RequestOrganizerButton>hello world</RequestOrganizerButton>
+								<Container maxWidth="sm">
+									<Box>
+										<Typography variant="h5" gutterBottom>
+											Request to be an organizer.
+										</Typography>
+										<Grid item xs={2}>
+											<Button size="small" color="primary">
+												Request
+											</Button>
+										</Grid>
+									</Box>
+								</Container>
 							</StyledPopperContent>
 						</Fade>
 					</ClickAwayListener>
