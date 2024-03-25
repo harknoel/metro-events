@@ -6,18 +6,35 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import RequestList from "./RequestList";
 import UserRole from "./UserRole";
+import axiosInstance from "../config/axiosInstance";
+import { useState, useEffect } from "react";
 
 export default function AdminUserRequest() {
-	const [value, setValue] = React.useState("1");
+	const [value, setValue] = useState("1");
+	const [requests, setRequests] = useState([]);
+
+	useEffect(() => {
+		getRequests();
+	}, []);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
-	const requests = [
-		{ participantId: 1, username: "User1", status: 0 },
-		{ participantId: 2, username: "User2", status: 1 },
-		{ participantId: 3, username: "User3", status: 0 },
-	];
+
+	const getRequests = async () => {
+		try {
+			const response = await axiosInstance("admins/organizer/requests");
+			console.log(response.data);
+			setRequests(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const acceptRequest = () => {};
+
+	const declineRequest = () => {};
+
 	return (
 		<Box sx={{ width: "100%", typography: "body1" }}>
 			<TabContext value={value}>
@@ -28,10 +45,11 @@ export default function AdminUserRequest() {
 					</TabList>
 				</Box>
 				<TabPanel value="1">
-					<RequestList requests={requests} />
-				</TabPanel>
-				<TabPanel value="2">
-					<UserRole requests={requests} />
+					<RequestList
+						requests={requests}
+						acceptRequest={acceptRequest}
+						declineRequest={declineRequest}
+					/>
 				</TabPanel>
 			</TabContext>
 		</Box>

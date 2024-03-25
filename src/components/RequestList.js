@@ -56,39 +56,36 @@ const RequestList = (props) => {
 			) : (
 				<>
 					<Divider component="li" />
-					{requests.map(
-						(request) =>
-							request.status === 0 && (
-								<React.Fragment key={request.participantId}>
-									<ListItem>
-										<Grid container spacing={2} alignItems="center">
-											<Grid item xs={10}>
-												<ListItemText primary={request.username} />
-											</Grid>
-											<Grid item xs={2}>
-												<Button
-													size="small"
-													color="primary"
-													onClick={() => handleAccept(request.participantId)}
-												>
-													Accept
-												</Button>
-												<Button
-													size="small"
-													color="error"
-													onClick={() => handleDecline(request.participantId)}
-												>
-													Decline
-												</Button>
-											</Grid>
-										</Grid>
-									</ListItem>
-									{requests.indexOf(request) !== requests.length - 1 && (
-										<Divider component="li" />
-									)}
-								</React.Fragment>
-							)
-					)}
+					{requests.map((request, index) => (
+						<React.Fragment key={index}>
+							<ListItem>
+								<Grid container spacing={2} alignItems="center">
+									<Grid item xs={10}>
+										<ListItemText primary={request.username} />
+									</Grid>
+									<Grid item xs={2}>
+										<Button
+											size="small"
+											color="primary"
+											onClick={() => handleAccept(index)}
+										>
+											Accept
+										</Button>
+										<Button
+											size="small"
+											color="error"
+											onClick={() => handleDecline(index)}
+										>
+											Decline
+										</Button>
+									</Grid>
+								</Grid>
+							</ListItem>
+							{requests.indexOf(request) !== requests.length - 1 && (
+								<Divider component="li" />
+							)}
+						</React.Fragment>
+					))}
 				</>
 			)}
 		</List>
