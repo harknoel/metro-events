@@ -13,9 +13,9 @@ export default function AdminUserRequest() {
     setValue(newValue);
   };
   const requests = [
-    { id: 1, user: "Guest 1" },
-    { id: 2, user: "Guest 2" },
-    { id: 3, user: "Guest 3" },
+    { participantId: 1, username: "User1", status: 0 },
+    { participantId: 2, username: "User2", status: 1 },
+    { participantId: 3, username: "User3", status: 0 },
   ];
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
