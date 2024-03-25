@@ -8,61 +8,64 @@ import { useNavigate } from "react-router-dom";
 import { CardContainer } from "../components/styles/UserEvents.styled";
 
 const UserEvents = () => {
-  const [open, setOpen] = useState(false);
-  const [events, setEvents] = useState();
-  const { user, setUser } = useContext(UserContext);
+	const [open, setOpen] = useState(false);
+	const [events, setEvents] = useState();
+	const { user, setUser } = useContext(UserContext);
 
-  let role = null;
-  if (user !== null) {
-    role = user.user.authorities[0].authority;
-  }
+	let role = null;
+	if (user !== null) {
+		role = user.user.authorities[0].authority;
+	}
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
-      navigate("/signin");
-    }
-  }, [user, navigate]);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
+			navigate("/signin");
+		}
+	}, [user, navigate, role]);
 
-  console.log(localStorage.getItem("username"));
+	console.log(localStorage.getItem("username"));
 
-  const getAllEvent = async () => {
-    try {
-      const response = await axios.get("/users/allEvents");
-      setEvents(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
+	const getAllEvent = async () => {
+		try {
+			const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    getAllEvent();
-  }, []);
+			const response = await axios.get("/users/allEvents", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			setEvents(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  return (
-    <div>
-      <UserNav />
-      <Container>
-        <h1>My Joined Events</h1>
-        <CardContainer>
-          {events &&
-            events.map((event) => (
-              <Event
-                key={event.eventId}
-                event={event}
-                open={open}
-                setOpen={setOpen}
-                showJoin={true}
-                showManage={true}
-              />
-            ))}
-        </CardContainer>
-      </Container>
-    </div>
-  );
+	useEffect(() => {
+		getAllEvent();
+	}, []);
+
+	return (
+		<div>
+			<UserNav />
+			<Container>
+				<h1>My Joined Events</h1>
+				<CardContainer>
+					{events &&
+						events.map((event) => (
+							<Event
+								key={event.eventId}
+								event={event}
+								open={open}
+								setOpen={setOpen}
+								showJoin={true}
+								showManage={true}
+							/>
+						))}
+				</CardContainer>
+			</Container>
+		</div>
+	);
 };
 
 export default UserEvents;
