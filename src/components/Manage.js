@@ -4,8 +4,11 @@ import Container from "./styles/Container.styled";
 import EventCard from "./EventCard";
 import { RedButton } from "./styles/Manage.styled";
 import RequestList from "./RequestList";
+import verifyUser from "../helperFunctions";
 
 const Manage = () => {
+  verifyUser("ORGANIZER");
+
   const requests = [
     { id: 1, user: "Guest 1" },
     { id: 2, user: "Guest 2" },

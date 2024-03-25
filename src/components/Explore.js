@@ -1,11 +1,28 @@
 import Event from "./Event";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import UserNav from "./UserNav";
 import Container from "./styles/Container.styled";
+import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const Explore = () => {
   const [open, setOpen] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
+  let role = null;
+  if (user !== null) {
+    role = user.user.authorities[0].authority;
+  }
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user == null || (role !== "USER" && role !== "ORGANIZER")) {
+      console.log("test");
+      navigate("/signin");
+    }
+  }, [user, navigate]);
+
+  console.log(localStorage.getItem("username"));
   const event = {
     title: "Sample Event",
     organizer: "John Doe",
