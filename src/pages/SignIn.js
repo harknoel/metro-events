@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import themeConfig from "../components/styles/themeConfig";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
 	StyledUserAuth,
 	InputEmail,
@@ -14,8 +14,6 @@ import {
 import axios from "axios";
 
 const SignIn = () => {
-	const navigate = useNavigate();
-
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
@@ -54,9 +52,9 @@ const SignIn = () => {
 			localStorage.setItem("username", response.data.user.username);
 			localStorage.setItem("token", response.data.jwt);
 			if (role === "USER" || role === "ORGANIZER") {
-				navigate("/userevents");
+				window.location.href = "/userevents";
 			} else if (role === "ADMIN") {
-				navigate("/admin");
+				window.location.href = "/admin";
 			}
 		} catch {}
 	};
