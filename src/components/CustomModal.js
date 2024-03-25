@@ -9,7 +9,7 @@ import {
 	ModalContainer,
 } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 
 const CustomModal = (props) => {
 	const { event, open, setOpen, showJoin, showManage } = props;
@@ -32,7 +32,7 @@ const CustomModal = (props) => {
 	const joinEvent = async () => {
 		const username = localStorage.getItem("username");
 		try {
-			const response = await axios.post(
+			const response = await axiosInstance.post(
 				`/users/join/${username}/${event.eventId}`
 			);
 			const responseDataString = JSON.stringify(response.data);

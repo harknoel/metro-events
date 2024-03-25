@@ -45,6 +45,7 @@ const SignIn = () => {
 			);
 
 			if (response.data.jwt !== "") {
+				localStorage.setItem("username", response.data.user.username);
 				localStorage.setItem("token", response.data.jwt);
 				navigate("/userevents");
 			} else {
