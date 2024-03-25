@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {
 	ButtonContainer,
@@ -21,6 +20,7 @@ import axiosInstance from "../config/axiosInstance";
 const CustomModal = (props) => {
 	const { event, open, setOpen, showJoin, showManage } = props;
 	const [userReview, setUserReview] = useState("");
+	const [reviews, setReviews] = useState(event.reviewList);
 
 	const handleClose = () => {
 		setOpen(false);
@@ -30,10 +30,24 @@ const CustomModal = (props) => {
 		setUserReview(event.target.value);
 	};
 
+	const addUserReview = async () => {
+		console.log(event.eventId);
+		try {
+			const response = await axiosInstance.post(
+				`/users/event/${event.eventId}/review`,
+				{
+					username: localStorage.getItem("username"),
+					comment: userReview,
+				}
+			);
+			setReviews(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const handleSubmit = () => {
-		console.log("User Review:", userReview);
-		setUserReview("");
-		setOpen(false);
+		addUserReview();
 	};
 
 	const joinEvent = async () => {
@@ -148,7 +162,7 @@ const CustomModal = (props) => {
 					<br />
 					<strong>User Reviews:</strong>
 					<ul>
-						{event.reviewList.map((review, index) => (
+						{reviews.map((review, index) => (
 							<li key={index}>
 								<strong>{review.username}:</strong> {review.comment}
 							</li>
