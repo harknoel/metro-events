@@ -167,7 +167,11 @@ const CustomModal = (props) => {
 						</ContentContainer>
 						<Card
 							variant="outlined"
-							sx={{ mt: 3, maxWidth: 900, boxShadow: 4 }}
+							sx={{
+								mt: 3,
+								maxWidth: 900,
+								boxShadow: '0px 4px 12px rgba(100, 98, 241, 0.5)'
+							}}
 						>
 							<CardContent>
 								<Typography variant="h6" component="div" gutterBottom>
