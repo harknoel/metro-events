@@ -17,7 +17,8 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationPopup from "./NotificationPopup";
 import { useContext } from "react";
 import { UserContext } from "../App";
-
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
 const UserNav = () => {
 	const { user, setUser } = useContext(UserContext);
 	const navigate = useNavigate();
@@ -31,7 +32,7 @@ const UserNav = () => {
 			<Container>
 				<Header>
 					<Link to="/userevents">
-						<Logo src="../images/logo.svg" alt=""></Logo>
+						<Logo src="./images/logo.svg" alt=""></Logo>
 					</Link>
 					<Nav>
 						<div>
@@ -40,8 +41,11 @@ const UserNav = () => {
 								user.user.authorities &&
 								user.user.authorities.length > 0 &&
 								user.user.authorities[0].authority === "ORGANIZER" && (
-									<Link to="/createevent">
-										<CreateEventButton>Create Event</CreateEventButton>
+									<Link to="/createevent" style={{ textDecoration: "none" }}>
+										<CreateEventButton>
+											<AddIcon style={{ color: "white" }} />
+											Create Event
+										</CreateEventButton>
 									</Link>
 								)}
 						</div>
@@ -64,12 +68,10 @@ const UserNav = () => {
 						<PopupState variant="popper" popupId="demo-popup-popper">
 							{(popupState) => (
 								<div>
-									<span
-										className="material-symbols-outlined"
+									<PersonIcon
+										style={{ color: "#6462F1" }}
 										{...bindToggle(popupState)}
-									>
-										account_circle
-									</span>
+									/>
 									<Popper {...bindPopper(popupState)} transition>
 										{({ TransitionProps }) => (
 											<ClickAwayListener onClickAway={popupState.close}>
