@@ -3,32 +3,23 @@ import Event from "./Event";
 import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
 import { CardContainer } from "../components/styles/UserEvents.styled";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 
 const UserEvents = () => {
 	const [open, setOpen] = useState(false);
 	const [events, setEvents] = useState();
 
-	console.log(localStorage.getItem("username"));
-
-	const getAllEvent = async () => {
+	const getAllEvents = async () => {
 		try {
-			const token = localStorage.getItem("token");
-			console.log("hello");
-
-			const response = await axios.get("/users/allEvents", {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const response = await axiosInstance.get("/users/allEvents");
 			setEvents(response.data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
 
 	useEffect(() => {
-		getAllEvent();
+		getAllEvents();
 	}, []);
 
 	return (
