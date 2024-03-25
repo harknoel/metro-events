@@ -66,8 +66,9 @@ const Manage = () => {
 					description={description}
 				/>
 				<RedButton>Cancel Event</RedButton>
+
 				<h1>Guest</h1>
-				<RequestList requests={requests} />
+				<RequestList requests={participantList} eventId={eventId} />
 			</Container>
 		</div>
 	);
