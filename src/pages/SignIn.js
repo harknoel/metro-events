@@ -45,12 +45,18 @@ const SignIn = () => {
 				}
 			);
 
-			if (response.data.jwt !== "") {
-				localStorage.setItem("username", response.data.user.username);
-				localStorage.setItem("token", response.data.jwt);
-				navigate("/userevents");
-			} else {
+			if (response.data.jwt === "") {
 				alert("Incorrect username or password.");
+				return;
+			}
+			const role = response.data.user.authorities[0].authority;
+			localStorage.setItem("role", role);
+			localStorage.setItem("username", response.data.user.username);
+			localStorage.setItem("token", response.data.jwt);
+			if (role === "USER" || role === "ORGANIZER") {
+				navigate("/userevents");
+			} else if (role === "ADMIN") {
+				navigate("/admin");
 			}
 		} catch {}
 	};
