@@ -34,16 +34,20 @@ export const NavLink = styled(Link)`
 `;
 
 export const CreateEventButton = styled.button`
-  background-color: #4caf50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6462f1;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  decoration: none;
   font-weight: bold;
   transition: background-color 0.3s;
   &:hover {
-    background-color: #45a049;
+    background-color: #7c7af5;
   }
 `;
