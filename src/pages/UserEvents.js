@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Event from "./Event";
 import UserNav from "../components/UserNav";
-import Container from "../components/styles/Container.styled";
+
+import CenterDiv from "../components/styles/CenterDiv";
 import { CardContainer } from "../components/styles/UserEvents.styled";
 import axiosInstance from "../config/axiosInstance";
 
@@ -28,7 +29,7 @@ const UserEvents = () => {
   return (
     <div>
       <UserNav />
-      <Container>
+      <CenterDiv>
         <h1>My Joined Events</h1>
         <CardContainer>
           {events &&
@@ -43,7 +44,7 @@ const UserEvents = () => {
               />
             ))}
         </CardContainer>
-      </Container>
+      </CenterDiv>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
+import { NavLink } from "./styles/UserNav.styled";
 import axiosInstance from "../config/axiosInstance";
 import {
   NotificationBox,
@@ -75,10 +75,20 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
 
   return (
     <div>
-      <NotificationsIcon
-        style={{ color: "#6462F1" }}
+      <NavLink
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textDecoration: "none",
+          color: "#6462f1",
+        }}
         {...bindToggle(popupState)}
-      />
+      >
+        <NotificationsIcon style={{ color: "#6462F1" }} />
+        Notifications
+      </NavLink>
+
       <Popper {...bindPopper(popupState)} transition>
         {({ TransitionProps }) => (
           <ClickAwayListener onClickAway={popupState.close}>
