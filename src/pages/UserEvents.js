@@ -9,10 +9,11 @@ const UserEvents = () => {
 	const [open, setOpen] = useState(false);
 	const [events, setEvents] = useState();
 
-	const getAllEvents = async () => {
+	const getAllUserEvents = async () => {
+		const username = localStorage.getItem("username");
 		try {
 			const response = await axiosInstance.get(
-				"http://localhost:8080/api/v1/users/allEvents"
+				`http://localhost:8080/api/v1/users/events/${username}`
 			);
 			setEvents(response.data);
 		} catch (error) {
@@ -21,7 +22,7 @@ const UserEvents = () => {
 	};
 
 	useEffect(() => {
-		getAllEvents();
+		getAllUserEvents();
 	});
 
 	return (
