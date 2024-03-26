@@ -28,14 +28,12 @@ export const Image = styled.img`
 
 export const ContentContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	gap: 60px;
 `;
 
 export const ParentContainer = styled.div`
 	margin: 0px 50px;
-	display: flex;
-	flex-direction: column;
 `;
 
 export const EventContainer = styled.div`

@@ -6,18 +6,35 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import RequestList from "./RequestList";
 import axiosInstance from "../config/axiosInstance";
+import UserRole from "./UserRole";
 import { useState, useEffect } from "react";
 
 export default function AdminUserRequest() {
 	const [value, setValue] = useState("1");
 	const [requests, setRequests] = useState([]);
+	const [allUsers, setAllUsers] = useState([]);
+	const requestss = [
+		{ participantId: 1, username: "User1", status: 0 },
+		{ participantId: 2, username: "User2", status: 1 },
+		{ participantId: 3, username: "User3", status: 0 },
+	];
 
 	useEffect(() => {
 		getRequests();
+		getAllUsers();
 	}, []);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
+	};
+
+	const getAllUsers = async () => {
+		try {
+			const response = await axiosInstance.get("/users");
+			setAllUsers(response.data);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const getRequests = async () => {
@@ -63,6 +80,9 @@ export default function AdminUserRequest() {
 						acceptRequest={acceptRequest}
 						declineRequest={declineRequest}
 					/>
+				</TabPanel>
+				<TabPanel value="2">
+					<UserRole requests={allUsers} />
 				</TabPanel>
 			</TabContext>
 		</Box>
