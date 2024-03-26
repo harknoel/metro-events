@@ -5,7 +5,6 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import RequestList from "./RequestList";
-import UserRole from "./UserRole";
 import axiosInstance from "../config/axiosInstance";
 import { useState, useEffect } from "react";
 
@@ -24,16 +23,30 @@ export default function AdminUserRequest() {
 	const getRequests = async () => {
 		try {
 			const response = await axiosInstance("admins/organizer/requests");
-			console.log(response.data);
 			setRequests(response.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const acceptRequest = () => {};
+	const acceptRequest = async (id) => {
+		console.log(id);
+		try {
+			await axiosInstance.post("admins/organizer/accept", id);
+			getRequests();
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-	const declineRequest = () => {};
+	const declineRequest = async (id) => {
+		try {
+			await axiosInstance.post("admins/organizer/decline", id);
+			getRequests();
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<Box sx={{ width: "100%", typography: "body1" }}>

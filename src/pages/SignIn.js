@@ -51,6 +51,7 @@ const SignIn = () => {
 			localStorage.setItem("role", role);
 			localStorage.setItem("username", response.data.user.username);
 			localStorage.setItem("token", response.data.jwt);
+			console.log(response.data.jwt)
 			if (role === "USER" || role === "ORGANIZER") {
 				window.location.href = "/userevents";
 			} else if (role === "ADMIN") {

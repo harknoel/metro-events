@@ -4,28 +4,26 @@ import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
 import axios from "axios";
 import { CardContainer } from "../components/styles/UserEvents.styled";
+import axiosInstance from "../config/axiosInstance";
 
 const Explore = () => {
 	const [open, setOpen] = useState(false);
 	const [events, setEvents] = useState();
 
-	console.log(localStorage.getItem("username"));
-
-	const getAllEvent = async () => {
+	const getAllEvents = async () => {
 		try {
-			const response = await axios.get("/users/allEvents");
+			const response = await axiosInstance.get(
+				"http://localhost:8080/api/v1/users/allEvents"
+			);
 			setEvents(response.data);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
-	useEffect(() => {
-		console.log(events);
-	}, [events]);
 
 	useEffect(() => {
-		getAllEvent();
-	}, []);
+		getAllEvents();
+	});
 
 	return (
 		<div>
