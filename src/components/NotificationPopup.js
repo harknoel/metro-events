@@ -15,6 +15,35 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
   const [notifications, setNotifications] = useState([]);
   const username = localStorage.getItem("username");
   useEffect(() => {
+    const formatDateTime = (dateTimeString) => {
+      const dateTime = new Date(dateTimeString);
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const month = months[dateTime.getMonth()];
+      const day = dateTime.getDate();
+      const year = dateTime.getFullYear();
+      let hours = dateTime.getHours();
+      const minutes = dateTime.getMinutes();
+      const amPM = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const formattedTime = `${hours}:${minutes
+        .toString()
+        .padStart(2, "0")} ${amPM}`;
+      return `${month} ${day}, ${year} at ${formattedTime}`;
+    };
+
     const getUserNotifications = async () => {
       try {
         const response = await axiosInstance.get(
@@ -28,8 +57,10 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
         );
         const newNotifications = filteredEvents.map((event, index) => ({
           id: index + 1,
-          message: `New event: ${event.title}`,
-          time: `Starts at: ${event.dateStart} at ${event.timeStart}`, // Combine dateStart and timeStart
+          message: `${event.title}`,
+          time: `Starts at: ${formatDateTime(
+            `${event.dateStart}T${event.timeStart}`
+          )}`, // Combine dateStart and timeStart
         }));
         setNotifications(newNotifications);
       } catch (error) {
