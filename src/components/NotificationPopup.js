@@ -6,7 +6,10 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import axiosInstance from "../config/axiosInstance";
-import { NotificationBox } from "./styles/NotificationPopup.styled"; // Assuming you have a NotificationBox styled component
+import {
+  NotificationBox,
+  NotificationItem,
+} from "./styles/NotificationPopup.styled";
 
 const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
   const [notifications, setNotifications] = useState([]);
@@ -28,6 +31,7 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
         const newNotifications = eventTitles.map((title, index) => ({
           id: index + 1,
           message: `New event: ${title}`,
+          time: new Date().toLocaleTimeString(),
         }));
         setNotifications(newNotifications);
       } catch (error) {
@@ -52,11 +56,19 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
             <Fade {...TransitionProps} timeout={350}>
               <NotificationBox>
                 {notifications.length > 0 ? (
-                  <ul>
-                    {notifications.map((notification) => (
-                      <li key={notification.id}>{notification.message}</li>
-                    ))}
-                  </ul>
+                  notifications.map((notification) => (
+                    <NotificationItem key={notification.id}>
+                      <img src="notification-icon.jpg" alt="Notification" />
+                      <div className="notification-content">
+                        <div className="notification-text">
+                          {notification.message}
+                        </div>
+                        <div className="notification-time">
+                          {notification.time}
+                        </div>
+                      </div>
+                    </NotificationItem>
+                  ))
                 ) : (
                   <p>No new notifications</p>
                 )}
