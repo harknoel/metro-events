@@ -87,7 +87,10 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
                     <NotificationItem key={notification.id}>
-                      <NotificationsIcon style={{ color: "#6462F1" }} />
+                      <img
+                        src="https://img.pikbest.com/templates/20230425/bg/cdcebbba5fc84.png!w700wp"
+                        alt="https://img.lovepik.com/free-template/01/31/92/83J888piC7M6.jpg_master.jpg!detail808"
+                      />
                       <div className="notification-content">
                         <div className="notification-text">
                           {notification.message}
