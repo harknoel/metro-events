@@ -51,9 +51,11 @@ const SignIn = () => {
 			localStorage.setItem("role", role);
 			localStorage.setItem("username", response.data.user.username);
 			localStorage.setItem("token", response.data.jwt);
-			console.log(response.data.jwt)
-			if (role === "USER" || role === "ORGANIZER") {
+			console.log(response.data.jwt);
+			if (role === "USER") {
 				window.location.href = "/userevents";
+			} else if (role === "ORGANIZER") {
+				window.location.href = "/organizer";
 			} else if (role === "ADMIN") {
 				window.location.href = "/admin";
 			}
@@ -72,6 +74,11 @@ const SignIn = () => {
 									placeholder="username"
 									name="username"
 									onChange={handleChange}
+									onKeyDown={(event) => {
+										if (event.key === " ") {
+											event.preventDefault(); // Prevent space from being typed
+										}
+									}}
 									required
 								/>
 								<InputPassword

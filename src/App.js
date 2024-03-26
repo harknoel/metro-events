@@ -7,6 +7,7 @@ import Explore from "./pages/Explore";
 import Manage from "./pages/Manage";
 import CreateEvent from "./pages/CreateEvent";
 import Admin from "./pages/Admin";
+import Organizer from "./pages/Organizer";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import PrivateUserRoutes from "./utils/PrivateUserRoutes";
 import PrivateOrganizerRoutes from "./utils/PrivateOrganizerRoutes";
@@ -41,6 +42,19 @@ function App() {
       </Router>
     </div>
   );
+						<Route element={<PrivateOrganizerRoutes />}>
+							<Route path="/manage/:eventId" element={<Manage />} />
+							<Route path="/createevent" element={<CreateEvent />} />
+							<Route path="/organizer" element={<Organizer />} />
+						</Route>
+					</Route>
+					<Route exact path="/" element={<LandingPage />} />
+					<Route exact path="/signin" element={<SignIn />} />
+					<Route exact path="/signup" element={<SignUp />} />
+				</Routes>
+			</Router>
+		</div>
+	);
 }
 
 export default App;

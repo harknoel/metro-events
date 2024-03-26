@@ -52,10 +52,15 @@ const SignUp = () => {
 							name="uname"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
+							onKeyDown={(event) => {
+								if (event.key === " ") {
+									event.preventDefault(); // Prevent space from being typed
+								}
+							}}
 							required
 						/>
 						<Input
-							type="text"
+							type="email"
 							placeholder="Email"
 							name="email"
 							value={email}
