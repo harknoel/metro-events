@@ -3,10 +3,24 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { ShowContainer } from "./styles/RolePopper.styled";
+import axiosInstance from "../config/axiosInstance";
 
-function RolePopover() {
+function RolePopover(props) {
+	const { role, userId } = props;
 	const [anchorEl, setAnchorEl] = useState(null);
-	const [userRole, setUserRole] = useState("User");
+	const [userRole, setUserRole] = useState(role);
+	const [loading, setLoading] = useState(false);
+
+	const changeUserRole = async (newRole) => {
+		try {
+			setLoading(true);
+			await axiosInstance.post(`/admins/${userId}/${newRole}`);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -18,6 +32,7 @@ function RolePopover() {
 
 	const handleRoleChange = (role) => {
 		setUserRole(role);
+		changeUserRole(role);
 		handleClose();
 	};
 
@@ -33,6 +48,7 @@ function RolePopover() {
 				onClick={handleClick}
 				color={getColor(userRole)}
 				sx={{ width: "100px", borderRadius: { borderRadius } }}
+				disabled={loading}
 			>
 				{userRole}
 			</Button>
@@ -55,24 +71,24 @@ function RolePopover() {
 						<Typography variant="h6">Select Role</Typography>
 						<Button
 							variant="contained"
-							onClick={() => handleRoleChange("User")}
-							color={getColor("User")}
+							onClick={() => handleRoleChange("USER")}
+							color={getColor("USER")}
 							sx={{ width: "100px", borderRadius: { borderRadius } }}
 						>
 							User
 						</Button>
 						<Button
 							variant="contained"
-							onClick={() => handleRoleChange("Organizer")}
-							color={getColor("Organizer")}
+							onClick={() => handleRoleChange("ORGANIZER")}
+							color={getColor("ORGANIZER")}
 							sx={{ width: "100px", borderRadius: { borderRadius } }}
 						>
 							Organizer
 						</Button>
 						<Button
 							variant="contained"
-							onClick={() => handleRoleChange("Admin")}
-							color={getColor("Admin")}
+							onClick={() => handleRoleChange("ADMIN")}
+							color={getColor("ADMIN")}
 							sx={{
 								width: "100px",
 								borderRadius: { borderRadius },
@@ -89,11 +105,11 @@ function RolePopover() {
 
 function getColor(role) {
 	switch (role) {
-		case "User":
+		case "USER":
 			return "primary";
-		case "Organizer":
+		case "ORGANIZER":
 			return "secondary";
-		case "Admin":
+		case "ADMIN":
 			return "error";
 		default:
 			return "default";
