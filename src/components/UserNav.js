@@ -36,12 +36,14 @@ const UserNav = () => {
 					</Link>
 					<Nav>
 						<div>
-							<Link to="/createevent" style={{ textDecoration: "none" }}>
-								<CreateEventButton>
-									<AddIcon style={{ color: "white" }} />
-									Create Event
-								</CreateEventButton>
-							</Link>
+							{localStorage.getItem("role") === "ORGANIZER" && (
+								<Link to="/createevent" style={{ textDecoration: "none" }}>
+									<CreateEventButton>
+										<AddIcon style={{ color: "white" }} />
+										Create Event
+									</CreateEventButton>
+								</Link>
+							)}
 						</div>
 						<div>
 							<NavLink to="/userevents">My Events</NavLink>
@@ -60,17 +62,17 @@ const UserNav = () => {
 								/>
 							)}
 						</PopupState>
-
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<PopperTicket
-									bindToggle={bindToggle}
-									bindPopper={bindPopper}
-									popupState={popupState}
-								/>
-							)}
-						</PopupState>
-
+						{localStorage.getItem("role") === "USER" && (
+							<PopupState variant="popper" popupId="demo-popup-popper">
+								{(popupState) => (
+									<PopperTicket
+										bindToggle={bindToggle}
+										bindPopper={bindPopper}
+										popupState={popupState}
+									/>
+								)}
+							</PopupState>
+						)}
 						<PopupState variant="popper" popupId="demo-popup-popper">
 							{(popupState) => (
 								<div>
