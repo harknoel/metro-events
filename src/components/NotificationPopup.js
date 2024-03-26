@@ -14,7 +14,6 @@ import {
 const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
   const [notifications, setNotifications] = useState([]);
   const username = localStorage.getItem("username");
-
   useEffect(() => {
     const getUserNotifications = async () => {
       try {
@@ -27,11 +26,10 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
             (participant) => participant.username === username
           )
         );
-        const eventTitles = filteredEvents.map((event) => event.title);
-        const newNotifications = eventTitles.map((title, index) => ({
+        const newNotifications = filteredEvents.map((event, index) => ({
           id: index + 1,
-          message: `New event: ${title}`,
-          time: new Date().toLocaleTimeString(),
+          message: `New event: ${event.title}`,
+          time: `Starts at: ${event.dateStart} at ${event.timeStart}`, // Combine dateStart and timeStart
         }));
         setNotifications(newNotifications);
       } catch (error) {
@@ -58,7 +56,7 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
                     <NotificationItem key={notification.id}>
-                      <img src="notification-icon.jpg" alt="Notification" />
+                      <NotificationsIcon style={{ color: "#6462F1" }} />
                       <div className="notification-content">
                         <div className="notification-text">
                           {notification.message}
