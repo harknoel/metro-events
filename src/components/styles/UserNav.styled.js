@@ -20,7 +20,6 @@ export const Nav = styled.nav`
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	gap: 10px;
 `;
 
 export const NavLink = styled(Link)`
@@ -41,7 +40,7 @@ export const CreateEventButton = styled.button`
 	color: white;
 	border: none;
 	padding: 10px 20px;
-	border-radius: 5px;
+	border-radius: 10px;
 	cursor: pointer;
 	font-size: 16px;
 	decoration: none;
@@ -56,5 +55,5 @@ export const OrganizerContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
+	gap: 5px;
 `;

@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import axiosInstance from "../config/axiosInstance";
+import { StyledNavLink } from "./styles/Nav.styled";
 
 const PopperTicket = (props) => {
 	const { bindToggle, bindPopper, popupState } = props;
@@ -36,10 +37,10 @@ const PopperTicket = (props) => {
 
 	return (
 		<div>
-			<ConfirmationNumberIcon
-				style={{ color: "#6462F1" }}
-				{...bindToggle(popupState)}
-			/>
+			<StyledNavLink {...bindToggle(popupState)}>
+				<ConfirmationNumberIcon style={{ color: "#6462F1" }} />
+				Request
+			</StyledNavLink>
 			<Popper {...bindPopper(popupState)} transition>
 				{({ TransitionProps }) => (
 					<ClickAwayListener onClickAway={popupState.close}>

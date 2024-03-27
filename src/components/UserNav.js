@@ -3,9 +3,8 @@ import {
 	Header,
 	Logo,
 	Nav,
-	NavLink,
 	CreateEventButton,
-	OrganizerContainer
+	OrganizerContainer,
 } from "./styles/UserNav.styled";
 import Container from "./styles/Container.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,12 +16,14 @@ import { RedButton } from "./styles/Manage.styled";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationPopup from "./NotificationPopup";
 import AddIcon from "@mui/icons-material/Add";
-import PersonIcon from "@mui/icons-material/Person";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PopperTicket from "./PopperTicket";
+import EventIcon from "@mui/icons-material/Event";
+import ExploreIcon from "@mui/icons-material/Explore";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
+import { StyledNavLink, PopupContainer, NavPage } from "./styles/Nav.styled";
 
 const UserNav = () => {
-	const navigate = useNavigate();
-
 	const notifications = [
 		{ id: 1, message: "Notification 1" },
 		{ id: 2, message: "Notification 2" },
@@ -39,80 +40,88 @@ const UserNav = () => {
 						<div>
 							{localStorage.getItem("role") === "ORGANIZER" && (
 								<OrganizerContainer>
-								<Link to="/createevent" style={{ textDecoration: "none" }}>
-									<CreateEventButton>
-										<AddIcon style={{ color: "white" }} />
-										Create Event
-									</CreateEventButton>
-								</Link>
-								<NavLink to="/organizer">My Events</NavLink>
+									<Link to="/createevent" style={{ textDecoration: "none" }}>
+										<CreateEventButton>
+											<AddIcon style={{ color: "white" }} />
+											Create Event
+										</CreateEventButton>
+									</Link>
+									<StyledNavLink to="/organizer">
+										<EventIcon style={{ color: "#6462F1" }} />
+										My Events
+									</StyledNavLink>
 								</OrganizerContainer>
 							)}
 						</div>
-						<div>
-							<NavLink to="/userevents">Joined Events</NavLink>
-						</div>
-						<div>
-							<NavLink to="/explore">Explore</NavLink>
-						</div>
-
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<NotificationPopup
-									notifications={notifications}
-									bindToggle={bindToggle}
-									bindPopper={bindPopper}
-									popupState={popupState}
-								/>
-							)}
-						</PopupState>
-						{localStorage.getItem("role") === "USER" && (
-							<PopupState variant="popper" popupId="demo-popup-popper">
+						<NavPage>
+							<StyledNavLink to="/userevents">
+								<EventAvailableIcon style={{ color: "#6462F1" }} />
+								Joined Events
+							</StyledNavLink>
+							<StyledNavLink to="/explore">
+								<ExploreIcon style={{ color: "#6462F1" }} />
+								Explore
+							</StyledNavLink>
+						</NavPage>
+						<PopupContainer>
+							<PopupState variant="popper">
 								{(popupState) => (
-									<PopperTicket
+									<NotificationPopup
+										notifications={notifications}
 										bindToggle={bindToggle}
 										bindPopper={bindPopper}
 										popupState={popupState}
 									/>
 								)}
 							</PopupState>
-						)}
-						<PopupState variant="popper" popupId="demo-popup-popper">
-							{(popupState) => (
-								<div>
-									<PersonIcon
-										style={{ color: "#6462F1" }}
-										{...bindToggle(popupState)}
-									/>
-									<Popper {...bindPopper(popupState)} transition>
-										{({ TransitionProps }) => (
-											<ClickAwayListener onClickAway={popupState.close}>
-												<Fade {...TransitionProps} timeout={350}>
-													<Paper
-														sx={{
-															p: 2,
-															maxWidth: 200,
-														}}
-													>
-														<a>
-															<RedButton
-																onClick={() => {
-																	localStorage.clear();
-																	window.location.href = "/signin";
-																	popupState.close();
-																}}
-															>
-																Logout
-															</RedButton>
-														</a>
-													</Paper>
-												</Fade>
-											</ClickAwayListener>
-										)}
-									</Popper>
-								</div>
+							{localStorage.getItem("role") === "USER" && (
+								<PopupState variant="popper">
+									{(popupState) => (
+										<PopperTicket
+											bindToggle={bindToggle}
+											bindPopper={bindPopper}
+											popupState={popupState}
+										/>
+									)}
+								</PopupState>
 							)}
-						</PopupState>
+							<PopupState variant="popper">
+								{(popupState) => (
+									<div>
+										<StyledNavLink {...bindToggle(popupState)}>
+											<AccountCircleIcon style={{ color: "#6462F1" }} />
+											Account
+										</StyledNavLink>
+										<Popper {...bindPopper(popupState)} transition>
+											{({ TransitionProps }) => (
+												<ClickAwayListener onClickAway={popupState.close}>
+													<Fade {...TransitionProps} timeout={350}>
+														<Paper
+															sx={{
+																p: 2,
+																maxWidth: 200,
+															}}
+														>
+															<a>
+																<RedButton
+																	onClick={() => {
+																		localStorage.clear();
+																		window.location.href = "/signin";
+																		popupState.close();
+																	}}
+																>
+																	Logout
+																</RedButton>
+															</a>
+														</Paper>
+													</Fade>
+												</ClickAwayListener>
+											)}
+										</Popper>
+									</div>
+								)}
+							</PopupState>
+						</PopupContainer>
 					</Nav>
 				</Header>
 			</Container>
