@@ -10,14 +10,14 @@ import {
 	ContentContainer,
 	ParentContainer,
 	EventContainer,
-	EventDetail,
-	EventDescription,
 	ParentButtonContainer,
 } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { IconButton } from "@mui/material";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import axiosInstance from "../config/axiosInstance";
 
 const CustomModal = (props) => {
@@ -76,6 +76,11 @@ const CustomModal = (props) => {
 		}
 	};
 
+	const [liked, setLiked] = useState(false);
+
+	const handleClick = () => {
+		setLiked(!liked);
+	};
 	return (
 		<Modal
 			open={open}
@@ -124,6 +129,14 @@ const CustomModal = (props) => {
 									<Typography variant="body1">
 										<strong>Time Will End:</strong> {event.timeEnd}
 									</Typography>
+									<Box sx={{ display: "flex", alignItems: "center" }}>
+										<IconButton onClick={handleClick}>
+											{liked ? <Favorite color="error" /> : <FavoriteBorder />}
+										</IconButton>
+										<Typography variant="body1">
+											<strong>15 </strong>Upvotes
+										</Typography>
+									</Box>
 								</EventContainer>
 								<ParentButtonContainer>
 									{showJoin && (
@@ -170,7 +183,7 @@ const CustomModal = (props) => {
 							sx={{
 								mt: 3,
 								maxWidth: 900,
-								boxShadow: '0px 4px 12px rgba(100, 98, 241, 0.5)'
+								boxShadow: "0px 4px 12px rgba(100, 98, 241, 0.5)",
 							}}
 						>
 							<CardContent>
