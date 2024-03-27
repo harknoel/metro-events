@@ -130,5 +130,3 @@ const UserNav = () => {
 };
 
 export default UserNav;
-
-// update
