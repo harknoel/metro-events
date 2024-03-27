@@ -18,6 +18,7 @@ import UserNav from "../components/UserNav";
 import { Content } from "../components/styles/CreateEvent.styled";
 import { useState } from "react";
 import axiosInstance from "../config/axiosInstance";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function CreateEvent() {
 	const [eventName, setEventName] = useState("");
@@ -71,6 +72,8 @@ export default function CreateEvent() {
 			.padStart(2, "0")}/${year}`;
 	}
 
+	const navigate = useNavigate();
+
 	const createEvent = async () => {
 		const username = localStorage.getItem("username");
 		try {
@@ -84,6 +87,7 @@ export default function CreateEvent() {
 				description: description,
 			});
 			alert("Successfully created event.");
+			navigate("/organizer");
 			clear();
 		} catch (error) {}
 	};
