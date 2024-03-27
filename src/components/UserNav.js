@@ -44,12 +44,15 @@ const UserNav = () => {
           <Nav>
             <div>
               {localStorage.getItem("role") === "ORGANIZER" && (
-                <Link to="/createevent" style={{ textDecoration: "none" }}>
-                  <CreateEventButton>
-                    <AddIcon style={{ color: "white" }} />
-                    Create Event
-                  </CreateEventButton>
-                </Link>
+                <OrganizerContainer>
+                  <Link to="/createevent" style={{ textDecoration: "none" }}>
+                    <CreateEventButton>
+                      <AddIcon style={{ color: "white" }} />
+                      Create Event
+                    </CreateEventButton>
+                  </Link>
+                  <NavLink to="/organizer">My Events</NavLink>
+                </OrganizerContainer>
               )}
             </div>
 

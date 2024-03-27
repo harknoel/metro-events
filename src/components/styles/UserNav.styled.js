@@ -63,6 +63,13 @@ export const CreateEventButton = styled.button`
   }
 `;
 
+export const OrganizerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
 // Styled SearchBar component
 export const SearchBar = styled.input`
   width: 300px;
