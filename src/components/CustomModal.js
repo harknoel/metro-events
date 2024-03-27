@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -34,7 +34,6 @@ const CustomModal = (props) => {
 	};
 
 	const addUserReview = async () => {
-		console.log(event.eventId);
 		try {
 			const response = await axiosInstance.post(
 				`/users/event/${event.eventId}/review`,
@@ -79,8 +78,35 @@ const CustomModal = (props) => {
 	const [liked, setLiked] = useState(false);
 
 	const handleClick = () => {
-		setLiked(!liked);
+		upvoteEvent();
 	};
+
+	const upvoteEvent = async () => {
+		try {
+			const response = await axiosInstance.post(
+				`users/${event.eventId}/upvote`,
+				localStorage.getItem("username")
+			);
+			const result = parseInt(response.data);
+			setLiked(result);
+		} catch (error) {}
+	};
+
+	useEffect(() => {
+		const isUserUpvoteEvent = async () => {
+			try {
+				const response = await axiosInstance.get(
+					`/users/upvote/check/${event.eventId}/${localStorage.getItem(
+						"username"
+					)}`
+				);
+				const result = JSON.parse(response.data);
+				setLiked(result);
+			} catch (error) {}
+		};
+		isUserUpvoteEvent();
+	}, [event.eventId]);
+
 	return (
 		<Modal
 			open={open}
@@ -134,7 +160,7 @@ const CustomModal = (props) => {
 											{liked ? <Favorite color="error" /> : <FavoriteBorder />}
 										</IconButton>
 										<Typography variant="body1">
-											<strong>15 </strong>Upvotes
+											<strong>{event.upvoteList.length} </strong>Upvote
 										</Typography>
 									</Box>
 								</EventContainer>
