@@ -5,6 +5,7 @@ import {
 	Nav,
 	NavLink,
 	CreateEventButton,
+	OrganizerContainer
 } from "./styles/UserNav.styled";
 import Container from "./styles/Container.styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,16 +38,19 @@ const UserNav = () => {
 					<Nav>
 						<div>
 							{localStorage.getItem("role") === "ORGANIZER" && (
+								<OrganizerContainer>
 								<Link to="/createevent" style={{ textDecoration: "none" }}>
 									<CreateEventButton>
 										<AddIcon style={{ color: "white" }} />
 										Create Event
 									</CreateEventButton>
 								</Link>
+								<NavLink to="/organizer">My Events</NavLink>
+								</OrganizerContainer>
 							)}
 						</div>
 						<div>
-							<NavLink to="/userevents">My Events</NavLink>
+							<NavLink to="/userevents">Joined Events</NavLink>
 						</div>
 						<div>
 							<NavLink to="/explore">Explore</NavLink>
