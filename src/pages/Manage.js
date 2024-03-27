@@ -4,7 +4,7 @@ import Container from "../components/styles/Container.styled";
 import EventCard from "../components/EventCard";
 import { RedButton } from "../components/styles/Manage.styled";
 import RequestList from "../components/RequestList";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../config/axiosInstance";
 
 const Manage = () => {
@@ -52,6 +52,22 @@ const Manage = () => {
 		getEventDetails();
 	}, [eventId]);
 
+	const navigate = useNavigate();
+
+	const onClickCancelEvent = async () => {
+		try {
+			const response = await axiosInstance.post(
+				`users/event/${eventId}/cancel`
+			);
+			if (response) {
+				navigate("/organizer");
+				alert(`Successfully deleted ${title}.`);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const acceptRequest = async (id) => {
 		try {
 			const response = await axiosInstance.post("/organizers/accept", {
@@ -86,13 +102,14 @@ const Manage = () => {
 			<Container>
 				<EventCard
 					eventName={title}
+					organizer={owner}
 					dateStarted={dateStart}
 					dateWillEnd={dateEnd}
 					timeStarted={timeStart}
 					timeWillEnd={timeEnd}
 					description={description}
 				/>
-				<RedButton>Cancel Event</RedButton>
+				<RedButton onClick={onClickCancelEvent}>Cancel Event</RedButton>
 
 				<h1>Guest</h1>
 				<RequestList

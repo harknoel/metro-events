@@ -53,7 +53,7 @@ const SignIn = () => {
 			localStorage.setItem("token", response.data.jwt);
 			console.log(response.data.jwt);
 			if (role === "USER") {
-				window.location.href = "/userevents";
+				window.location.href = "/explore";
 			} else if (role === "ORGANIZER") {
 				window.location.href = "/organizer";
 			} else if (role === "ADMIN") {
