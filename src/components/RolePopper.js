@@ -6,21 +6,9 @@ import { ShowContainer } from "./styles/RolePopper.styled";
 import axiosInstance from "../config/axiosInstance";
 
 function RolePopover(props) {
-	const { role, userId } = props;
+	const { role, userId, changeUserRole } = props;
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [userRole, setUserRole] = useState(role);
-	const [loading, setLoading] = useState(false);
-
-	const changeUserRole = async (newRole) => {
-		try {
-			setLoading(true);
-			await axiosInstance.post(`/admins/${userId}/${newRole}`);
-		} catch (error) {
-			console.log(error);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -32,7 +20,7 @@ function RolePopover(props) {
 
 	const handleRoleChange = (role) => {
 		setUserRole(role);
-		changeUserRole(role);
+		changeUserRole(role, userId);
 		handleClose();
 	};
 
@@ -48,7 +36,6 @@ function RolePopover(props) {
 				onClick={handleClick}
 				color={getColor(userRole)}
 				sx={{ width: "100px", borderRadius: { borderRadius } }}
-				disabled={loading}
 			>
 				{userRole}
 			</Button>

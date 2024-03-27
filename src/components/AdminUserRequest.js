@@ -13,11 +13,6 @@ export default function AdminUserRequest() {
 	const [value, setValue] = useState("1");
 	const [requests, setRequests] = useState([]);
 	const [allUsers, setAllUsers] = useState([]);
-	const requestss = [
-		{ participantId: 1, username: "User1", status: 0 },
-		{ participantId: 2, username: "User2", status: 1 },
-		{ participantId: 3, username: "User3", status: 0 },
-	];
 
 	useEffect(() => {
 		getRequests();
@@ -35,6 +30,13 @@ export default function AdminUserRequest() {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+
+	const updateUsers = async () => {
+		try {
+			await getAllUsers();
+			return allUsers;
+		} catch {}
 	};
 
 	const getRequests = async () => {
@@ -82,7 +84,7 @@ export default function AdminUserRequest() {
 					/>
 				</TabPanel>
 				<TabPanel value="2">
-					<UserRole requests={allUsers} />
+					<UserRole requests={allUsers} updateUsers={updateUsers} />
 				</TabPanel>
 			</TabContext>
 		</Box>
