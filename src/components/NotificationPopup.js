@@ -52,7 +52,7 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
               <NotificationBox>
                 {notifications.length > 0 ? (
                   notifications.map((notification) => (
-                    <NotificationItem key={notification.id}>
+                    <NotificationItem key={notification.eventId}>
                       <div key={notification.eventId}>
                         <div className="notification-content">
                           <div className="notification-text">
