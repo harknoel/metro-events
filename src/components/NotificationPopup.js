@@ -28,19 +28,10 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
 
   useEffect(() => {
     getAllUserNotification();
-  });
+    const intervalId = setInterval(getAllUserNotification, 5000);
 
-  // const notifications = [
-  //   { title: "New Message", content: "You have a new message from John Doe" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  //   { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
-  // ];
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
 
   return (
     <div>
