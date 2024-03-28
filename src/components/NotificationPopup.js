@@ -12,9 +12,15 @@ import { Divider } from "@mui/material";
 import { NotificationBox } from "./styles/NotificationPopup.styled";
 
 const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
-  //   const [notifications, setNotifications] = useState([]);
   const notifications = [
     { title: "New Message", content: "You have a new message from John Doe" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
+    { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
     { title: "Reminder", content: "Don't forget your meeting at 2 PM" },
   ];
   return (
