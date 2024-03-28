@@ -161,6 +161,7 @@ const CustomModal = (props) => {
                     </IconButton>
                     <Typography variant="body1">
                       {/* Made changes because of error*/}
+                      {/* Test */}
                       {/* <strong>{event.upvoteList.length} </strong>Upvote */}
                     </Typography>
                   </Box>
