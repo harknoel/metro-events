@@ -6,7 +6,7 @@ const NotificationListItem = ({ notification, onDelete }) => {
     <ListItem>
       <ListItemText
         primary={notification.title}
-        secondary={notification.content}
+        secondary={notification.message}
       />
     </ListItem>
   );
