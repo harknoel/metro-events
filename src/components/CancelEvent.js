@@ -6,9 +6,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { RedButton } from "./styles/Manage.styled";
+import axiosInstance from "../config/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export const CancelEvent = (props) => {
-  const { event } = props;
+  const { eventId, eventName } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -20,11 +23,25 @@ export const CancelEvent = (props) => {
     setOpen(false);
   };
 
+  const navigate = useNavigate();
+
+  const onSubmitCancelEvent = async (message) => {
+    try {
+      const response = await axiosInstance.post(
+        `users/event/${eventId}/${eventName} IS CANCELLED/${message}/cancel`
+      );
+      if (response) {
+        navigate("/organizer");
+        alert(`Successfully deleted ${eventName}.`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Cancel Event
-      </Button>
+      <RedButton onClick={handleClickOpen}>Cancel Event</RedButton>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -35,7 +52,7 @@ export const CancelEvent = (props) => {
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const description = formJson.description;
-            console.log(description);
+            onSubmitCancelEvent(description);
             handleClose();
           },
         }}
@@ -54,8 +71,6 @@ export const CancelEvent = (props) => {
             name="description"
             label="Description"
             type="description"
-            multiline
-            rows={4}
             fullWidth
             variant="standard"
           />
