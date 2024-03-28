@@ -21,10 +21,3 @@ export const Title = styled(Typography)`
 export const Description = styled(Typography)`
   margin-top: 10px;
 `;
-
-//Style
-// Test
-// Hello world
-//goods
-//goods najd
-//final
