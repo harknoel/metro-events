@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../config/axiosInstance";
 
 const UserNav = () => {
-  const [invisible, setInvisible] = useState(false);
+  const [invisible, setInvisible] = useState(true);
 
   const checkUserNotification = async () => {
     try {
