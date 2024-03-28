@@ -38,7 +38,7 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
   return (
     <PopupContainer>
       <StyledNavLink {...bindToggle(popupState)}>
-        <NotificationsIcon style={{ color: "#6462F1" }} />
+        <NotificationsIcon />
         {notificationCount > 0 && (
           <NotificationCounter>{notificationCount}</NotificationCounter>
         )}

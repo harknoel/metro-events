@@ -7,13 +7,17 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   flex-direction: column;
   text-decoration: none;
-  color: #6462f1;
-  padding: 10px;
-  position: relative; /* Add relative positioning */
-  transition: transform 0.3s ease; /* Add transition effect */
+  color: #1a1a1a;
+  padding: 5px;
+  position: relative;
+  transition: color 0.3s ease; /* Add transition effect for color change */
 
   &:hover {
-    transform: translateY(-2px); /* Adjust the transformation as needed */
+    color: #6462f1; /* Change color on hover */
+  }
+
+  &:active {
+    color: #6462f1; /* Change color on active */
   }
 `;
 
