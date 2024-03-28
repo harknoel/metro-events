@@ -165,23 +165,24 @@ const CustomModal = (props) => {
                   </Box>
                 </EventContainer>
                 <ParentButtonContainer>
-                  {showJoin && (
-                    <ButtonContainer>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{
-                          width: "150px",
-                          height: "50px",
-                          backgroundColor: "#6462F1",
-                          "&:hover": { backgroundColor: "#94A6F2" },
-                        }}
-                        onClick={joinEvent}
-                      >
-                        Join
-                      </Button>
-                    </ButtonContainer>
-                  )}
+                  {showJoin &&
+                    localStorage.getItem("username") !== event.owner && (
+                      <ButtonContainer>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          sx={{
+                            width: "150px",
+                            height: "50px",
+                            backgroundColor: "#6462F1",
+                            "&:hover": { backgroundColor: "#94A6F2" },
+                          }}
+                          onClick={joinEvent}
+                        >
+                          Join
+                        </Button>
+                      </ButtonContainer>
+                    )}
                   {showManage && (
                     <ButtonContainer>
                       <Link to={`/manage/${event.eventId}`}>
