@@ -22,12 +22,29 @@ import EventIcon from "@mui/icons-material/Event";
 import ExploreIcon from "@mui/icons-material/Explore";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import { StyledNavLink, PopupContainer, NavPage } from "./styles/Nav.styled";
+import { useState, useEffect } from "react";
+import axiosInstance from "../config/axiosInstance";
 
 const UserNav = () => {
-  const notifications = [
-    { id: 1, message: "Notification 1" },
-    { id: 2, message: "Notification 2" },
-  ];
+  const [invisible, setInvisible] = useState(false);
+
+  const checkUserNotification = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/users/notification/${localStorage.getItem("username")}/checkIsSeen`
+      );
+      setInvisible(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    checkUserNotification();
+    const intervalId = setInterval(checkUserNotification, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <StyledUserNav>
@@ -67,10 +84,10 @@ const UserNav = () => {
               <PopupState variant="popper">
                 {(popupState) => (
                   <NotificationPopup
-                    notifications={notifications}
                     bindToggle={bindToggle}
                     bindPopper={bindPopper}
                     popupState={popupState}
+                    invisible={invisible}
                   />
                 )}
               </PopupState>

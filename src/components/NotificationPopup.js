@@ -12,7 +12,12 @@ import { NotificationBox } from "./styles/NotificationPopup.styled";
 import { useState, useEffect } from "react";
 import axiosInstance from "../config/axiosInstance";
 
-const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
+const NotificationPopup = ({
+  bindToggle,
+  bindPopper,
+  popupState,
+  invisible,
+}) => {
   const [notifications, setNotifications] = useState(null);
 
   const getAllUserNotification = async () => {
@@ -26,17 +31,31 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
     }
   };
 
+  const setNotificationIsSeen = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/users/notifaction/${localStorage.getItem("username")}/IsSeen`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getAllUserNotification();
+    if (popupState.isOpen) {
+      setNotificationIsSeen();
+    }
     const intervalId = setInterval(getAllUserNotification, 5000);
 
     return () => clearInterval(intervalId); // Cleanup on unmount
-  }, []);
+  }, [popupState.isOpen]);
 
   return (
     <div>
       <StyledNavLink {...bindToggle(popupState)}>
-        <Badge color="secondary" variant="dot" invisible={false}>
+        <Badge color="secondary" variant="dot" invisible={invisible}>
           <NotificationsIcon style={{ color: "#6462F1" }} />
         </Badge>
         Notifications
