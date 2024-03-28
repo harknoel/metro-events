@@ -160,7 +160,8 @@ const CustomModal = (props) => {
                       {liked ? <Favorite color="error" /> : <FavoriteBorder />}
                     </IconButton>
                     <Typography variant="body1">
-                      <strong>{event.upvoteList.length} </strong>Upvote
+                      {/* Commented out because of a bug */}
+                      {/* <strong>{event.upvoteList.length} </strong>Upvote */}
                     </Typography>
                   </Box>
                 </EventContainer>
