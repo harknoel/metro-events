@@ -12,7 +12,6 @@ import Textarea from "@mui/joy/Textarea";
 const Manage = () => {
   let { eventId } = useParams();
 
-  const [event, setEventId] = useState("");
   const [active, setActive] = useState(true);
   const [dateEnd, setDateEnd] = useState("");
   const [dateStart, setDateStart] = useState("");
@@ -42,6 +41,8 @@ const Manage = () => {
     setTitle(result.title);
     console.log(participants);
   };
+
+  const [reminderText, setReminderText] = useState("");
 
   useEffect(() => {
     const getEventDetails = async () => {
@@ -83,6 +84,17 @@ const Manage = () => {
     }
   };
 
+  const addReminder = async (reminderText) => {
+    try {
+      const response = await axiosInstance.get(
+        `users/notification/${eventId}/${reminderText}/reminder`
+      );
+      console.log(reminderText);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <UserNav />
@@ -104,6 +116,9 @@ const Manage = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
+            addReminder(reminderText);
+            setReminderText("");
+            alert("Reminder successfully sent.");
           }}
         >
           <Textarea
@@ -114,6 +129,8 @@ const Manage = () => {
             size="lg"
             variant="soft"
             required
+            value={reminderText}
+            onChange={(event) => setReminderText(event.target.value)}
           />
           <Button type="submit" variant="contained" sx={{ mt: 2 }}>
             Add reminder
