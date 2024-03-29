@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
 import EventCard from "../components/EventCard";
-import { RedButton } from "../components/styles/Manage.styled";
 import RequestList from "../components/RequestList";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../config/axiosInstance";
 import { CancelEvent } from "../components/CancelEvent";
+import { Divider, Button } from "@mui/material";
+import Textarea from "@mui/joy/Textarea";
 
 const Manage = () => {
   let { eventId } = useParams();
@@ -95,8 +96,32 @@ const Manage = () => {
           timeWillEnd={timeEnd}
           description={description}
         />
-        <RedButton>Cancel Event</RedButton>
         <CancelEvent eventId={eventId} eventName={title}></CancelEvent>
+      </Container>
+      <Divider sx={{ mt: 3 }}></Divider>
+      <Container>
+        <h1>Reminder</h1>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
+          <Textarea
+            color="neutral"
+            disabled={false}
+            minRows={4}
+            placeholder="Type your reminder here..."
+            size="lg"
+            variant="soft"
+            required
+          />
+          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+            Add reminder
+          </Button>
+        </form>
+      </Container>
+      <Divider sx={{ mt: 3 }}></Divider>
+      <Container>
         <h1>Guest</h1>
         <RequestList
           requests={participantList}

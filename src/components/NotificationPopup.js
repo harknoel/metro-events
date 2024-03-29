@@ -10,6 +10,7 @@ import NotificationListItem from "./NotificationListItem";
 import { Divider } from "@mui/material";
 import { NotificationBox } from "./styles/NotificationPopup.styled";
 import { useState, useEffect } from "react";
+import { Message } from "./styles/Request.styled";
 import axiosInstance from "../config/axiosInstance";
 
 const NotificationPopup = ({
@@ -67,12 +68,16 @@ const NotificationPopup = ({
             <Fade {...TransitionProps} timeout={350}>
               <NotificationBox>
                 <List>
-                  {notifications.map((notification, index) => (
-                    <div key={index}>
-                      <NotificationListItem notification={notification} />
-                      {index < notifications.length - 1 && <Divider />}
-                    </div>
-                  ))}
+                  {notifications.length === 0 ? (
+                    <Message>Empty notifications.</Message>
+                  ) : (
+                    notifications.map((notification, index) => (
+                      <div key={index}>
+                        <NotificationListItem notification={notification} />
+                        {index < notifications.length - 1 && <Divider />}
+                      </div>
+                    ))
+                  )}
                 </List>
               </NotificationBox>
             </Fade>

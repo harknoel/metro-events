@@ -41,7 +41,14 @@ export const CancelEvent = (props) => {
 
   return (
     <React.Fragment>
-      <RedButton onClick={handleClickOpen}>Cancel Event</RedButton>
+      <Button
+        onClick={handleClickOpen}
+        color="error"
+        variant="contained"
+        sx={{ mt: 2 }}
+      >
+        Cancel Event
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}

@@ -9,4 +9,5 @@ export const NotificationBox = styled.div`
   overflow-y: auto;
   width: 250px;
   max-height: 350px;
+  min-height: 100px;
 `;
