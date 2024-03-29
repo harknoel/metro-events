@@ -38,7 +38,7 @@ const PopperTicket = (props) => {
   return (
     <div>
       <StyledNavLink {...bindToggle(popupState)}>
-        <ConfirmationNumberIcon />
+        <ConfirmationNumberIcon style={{ color: "#6462F1" }} />
         Request
       </StyledNavLink>
       <Popper {...bindPopper(popupState)} transition>
