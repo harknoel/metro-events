@@ -33,16 +33,19 @@ const UserEvents = () => {
         <h1>My Joined Events</h1>
         <CardContainer>
           {events &&
-            events.map((event) => (
-              <Event
-                key={event.eventId}
-                event={event}
-                open={open}
-                setOpen={setOpen}
-                showJoin={false}
-                showManage={true}
-              />
-            ))}
+            events.map(
+              (event) =>
+                event.active && (
+                  <Event
+                    key={event.eventId}
+                    event={event}
+                    open={open}
+                    setOpen={setOpen}
+                    showJoin={false}
+                    showManage={true}
+                  />
+                )
+            )}
         </CardContainer>
       </Container>
     </div>
