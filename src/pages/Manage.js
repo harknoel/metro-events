@@ -8,6 +8,12 @@ import axiosInstance from "../config/axiosInstance";
 import { CancelEvent } from "../components/CancelEvent";
 import { Divider, Button } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import GuestList from "../components/GuestList";
 
 const Manage = () => {
   let { eventId } = useParams();
@@ -19,6 +25,7 @@ const Manage = () => {
   const [eventDateTimeCreated, setEventDateTimeCreated] = useState("");
   const [owner, setOwner] = useState("");
   const [participantList, setParticipantList] = useState([]);
+  const [activeParticipantList, setActiveParticipantList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
   const [timeEnd, setTimeEnd] = useState("");
   const [timeStart, setTimeStart] = useState("");
@@ -34,6 +41,9 @@ const Manage = () => {
     setOwner(result.owner);
     setParticipantList(
       participants.filter((partcipant) => partcipant.status === 0)
+    );
+    setActiveParticipantList(
+      participants.filter((participant) => participant.status === 1)
     );
     setReviewList(result.reviewList);
     setTimeEnd(result.timeEnd);
@@ -65,6 +75,9 @@ const Manage = () => {
       setParticipantList(
         response.data.filter((partcipant) => partcipant.status === 0)
       );
+      setActiveParticipantList(
+        response.data.filter((participant) => participant.status === 1)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +91,9 @@ const Manage = () => {
       });
       setParticipantList(
         response.data.filter((partcipant) => partcipant.status === 0)
+      );
+      setActiveParticipantList(
+        response.data.filter((participant) => participant.status === 1)
       );
     } catch (error) {
       console.log(error);
@@ -93,6 +109,12 @@ const Manage = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const [value, setValue] = React.useState("1");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -139,12 +161,28 @@ const Manage = () => {
       </Container>
       <Divider sx={{ mt: 3 }}></Divider>
       <Container>
-        <h1>Guest</h1>
-        <RequestList
-          requests={participantList}
-          acceptRequest={acceptRequest}
-          declineRequest={declineRequest}
-        />
+        <Box sx={{ mt: 1, width: "100%", typography: "body1" }}>
+          <TabContext value={value}>
+            <Box>
+              <TabList onChange={handleChange} aria-label="organizer tabs">
+                <Tab label="Requests" value="1" />
+                <Tab label="Guest List" value="2" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              <h1>Guest's Request</h1>
+              <RequestList
+                requests={participantList}
+                acceptRequest={acceptRequest}
+                declineRequest={declineRequest}
+              />
+            </TabPanel>
+            <TabPanel value="2">
+              <h1>Guest List</h1>
+              <GuestList requests={activeParticipantList}></GuestList>
+            </TabPanel>
+          </TabContext>
+        </Box>
       </Container>
     </div>
   );
