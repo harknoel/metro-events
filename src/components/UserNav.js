@@ -64,7 +64,7 @@ const UserNav = () => {
                     </CreateEventButton>
                   </Link>
                   <StyledNavLink to="/organizer">
-                    <EventIcon />
+                    <EventIcon style={{ color: "#6462F1" }} />
                     My Events
                   </StyledNavLink>
                 </OrganizerContainer>
@@ -72,11 +72,11 @@ const UserNav = () => {
             </div>
             <NavPage>
               <StyledNavLink to="/userevents">
-                <EventAvailableIcon />
+                <EventAvailableIcon style={{ color: "#6462F1" }} />
                 Joined Events
               </StyledNavLink>
               <StyledNavLink to="/explore">
-                <ExploreIcon />
+                <ExploreIcon style={{ color: "#6462F1" }} />
                 Explore
               </StyledNavLink>
             </NavPage>
@@ -106,7 +106,7 @@ const UserNav = () => {
                 {(popupState) => (
                   <div>
                     <StyledNavLink {...bindToggle(popupState)}>
-                      <AccountCircleIcon />
+                      <AccountCircleIcon style={{ color: "#6462F1" }} />
                       Account
                     </StyledNavLink>
                     <Popper {...bindPopper(popupState)} transition>
