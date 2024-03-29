@@ -68,7 +68,7 @@ const CustomModal = (props) => {
       } else if (responseDataString === "1") {
         alert("Request to join the event.");
       } else {
-        alert("You already requested. Waiting for approval...");
+        alert("You already requested.");
       }
     } catch (error) {
       console.log(error);

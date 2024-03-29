@@ -23,7 +23,8 @@ const UserEvents = () => {
 
   useEffect(() => {
     getAllUserEvents();
-  });
+    console.log("test");
+  }, []);
 
   return (
     <div>
@@ -38,7 +39,7 @@ const UserEvents = () => {
                 event={event}
                 open={open}
                 setOpen={setOpen}
-                showJoin={true}
+                showJoin={false}
                 showManage={true}
               />
             ))}
