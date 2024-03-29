@@ -3,7 +3,7 @@ import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
 import EventCard from "../components/EventCard";
 import RequestList from "../components/RequestList";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axiosInstance from "../config/axiosInstance";
 import { CancelEvent } from "../components/CancelEvent";
 import { Divider, Button } from "@mui/material";
@@ -18,26 +18,21 @@ import GuestList from "../components/GuestList";
 const Manage = () => {
   let { eventId } = useParams();
 
-  const [active, setActive] = useState(true);
   const [dateEnd, setDateEnd] = useState("");
   const [dateStart, setDateStart] = useState("");
   const [description, setDescription] = useState("");
-  const [eventDateTimeCreated, setEventDateTimeCreated] = useState("");
   const [owner, setOwner] = useState("");
   const [participantList, setParticipantList] = useState([]);
   const [activeParticipantList, setActiveParticipantList] = useState([]);
-  const [reviewList, setReviewList] = useState([]);
   const [timeEnd, setTimeEnd] = useState("");
   const [timeStart, setTimeStart] = useState("");
   const [title, setTitle] = useState("");
 
   const setDetails = (result) => {
     const participants = result.participantList;
-    setActive(result.active);
     setDateEnd(result.dateEnd);
     setDateStart(result.dateStart);
     setDescription(result.description);
-    setEventDateTimeCreated(result.eventDateTimeCreated);
     setOwner(result.owner);
     setParticipantList(
       participants.filter((partcipant) => partcipant.status === 0)
@@ -45,7 +40,6 @@ const Manage = () => {
     setActiveParticipantList(
       participants.filter((participant) => participant.status === 1)
     );
-    setReviewList(result.reviewList);
     setTimeEnd(result.timeEnd);
     setTimeStart(result.timeStart);
     setTitle(result.title);
@@ -102,10 +96,9 @@ const Manage = () => {
 
   const addReminder = async (reminderText) => {
     try {
-      const response = await axiosInstance.get(
+      await axiosInstance.get(
         `users/notification/${eventId}/${reminderText}/reminder`
       );
-      console.log(reminderText);
     } catch (error) {
       console.error(error);
     }
