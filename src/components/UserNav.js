@@ -122,7 +122,7 @@ const UserNav = () => {
                               <RedButton
                                 onClick={() => {
                                   localStorage.clear();
-                                  window.location.href = "/signin";
+                                  window.location.href = "/";
                                   popupState.close();
                                 }}
                               >
