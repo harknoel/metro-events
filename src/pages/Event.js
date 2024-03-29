@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CustomModal from "../components/CustomModal";
 import Card from "../components/Card";
-import axiosInstance from "../config/axiosInstance";
 
 const Event = (props) => {
 	const { event, showJoin } = props;

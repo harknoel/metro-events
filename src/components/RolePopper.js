@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { ShowContainer } from "./styles/RolePopper.styled";
-import axiosInstance from "../config/axiosInstance";
 
 function RolePopover(props) {
 	const { role, userId, changeUserRole } = props;

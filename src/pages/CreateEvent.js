@@ -18,7 +18,7 @@ import UserNav from "../components/UserNav";
 import { Content } from "../components/styles/CreateEvent.styled";
 import { useState } from "react";
 import axiosInstance from "../config/axiosInstance";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateEvent() {
 	const [eventName, setEventName] = useState("");

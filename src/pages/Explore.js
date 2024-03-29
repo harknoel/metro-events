@@ -2,7 +2,6 @@ import Event from "./Event";
 import React, { useState, useEffect } from "react";
 import UserNav from "../components/UserNav";
 import Container from "../components/styles/Container.styled";
-import axios from "axios";
 import { CardContainer } from "../components/styles/UserEvents.styled";
 import axiosInstance from "../config/axiosInstance";
 
