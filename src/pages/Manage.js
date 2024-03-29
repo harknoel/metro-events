@@ -95,7 +95,6 @@ const Manage = () => {
           timeWillEnd={timeEnd}
           description={description}
         />
-        <RedButton>Cancel Event</RedButton>
         <CancelEvent eventId={eventId} eventName={title}></CancelEvent>
         <h1>Guest</h1>
         <RequestList
