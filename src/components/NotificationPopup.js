@@ -57,7 +57,7 @@ const NotificationPopup = ({
     <div>
       <StyledNavLink {...bindToggle(popupState)}>
         <Badge color="secondary" variant="dot" invisible={invisible}>
-          <NotificationsIcon style={{ color: "#6462F1" }} />
+          <NotificationsIcon />
         </Badge>
         Notifications
       </StyledNavLink>
