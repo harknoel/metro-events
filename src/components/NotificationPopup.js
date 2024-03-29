@@ -1,47 +1,63 @@
-import React, { useEffect, useState } from "react";
+// NotificationPopup.js
 import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import {
-  StyledNavLink,
-  PopupContainer,
-  NotificationCounter,
-} from "./styles/Nav.styled";
-import {
-  NotificationBox,
-  NotificationItem,
-} from "./styles/NotificationPopup.styled";
+import { StyledNavLink } from "./styles/Nav.styled";
+import Badge from "@mui/material/Badge";
+import List from "@mui/material/List";
+import NotificationListItem from "./NotificationListItem";
+import { Divider } from "@mui/material";
+import { NotificationBox } from "./styles/NotificationPopup.styled";
+import { useState, useEffect } from "react";
 import axiosInstance from "../config/axiosInstance";
 
-const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
-  const [notifications, setNotifications] = useState([]);
-  const [notificationCount, setNotificationCount] = useState(0);
+const NotificationPopup = ({
+  bindToggle,
+  bindPopper,
+  popupState,
+  invisible,
+}) => {
+  const [notifications, setNotifications] = useState(null);
 
-  const getAllNotifications = async () => {
-    const username = localStorage.getItem("username");
+  const getAllUserNotification = async () => {
     try {
       const response = await axiosInstance.get(
-        `http://localhost:8080/api/v1/users/events/${username}`
+        `/users/notifications/${localStorage.getItem("username")}`
       );
       setNotifications(response.data);
-      setNotificationCount(response.data.length);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const setNotificationIsSeen = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/users/notifaction/${localStorage.getItem("username")}/IsSeen`
+      );
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getAllNotifications();
-  }, []);
+    getAllUserNotification();
+    if (popupState.isOpen) {
+      setNotificationIsSeen();
+    }
+    const intervalId = setInterval(getAllUserNotification, 5000);
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, [popupState.isOpen]);
 
   return (
-    <PopupContainer>
+    <div>
       <StyledNavLink {...bindToggle(popupState)}>
-        <NotificationsIcon />
-        {notificationCount > 0 && (
-          <NotificationCounter>{notificationCount}</NotificationCounter>
-        )}
+        <Badge color="secondary" variant="dot" invisible={invisible}>
+          <NotificationsIcon style={{ color: "#6462F1" }} />
+        </Badge>
         Notifications
       </StyledNavLink>
 
@@ -50,34 +66,20 @@ const NotificationPopup = ({ bindToggle, bindPopper, popupState }) => {
           <ClickAwayListener onClickAway={popupState.close}>
             <Fade {...TransitionProps} timeout={350}>
               <NotificationBox>
-                {notifications.length > 0 ? (
-                  notifications.map((notification) => (
-                    <NotificationItem key={notification.eventId}>
-                      <div key={notification.eventId}>
-                        <div className="notification-content">
-                          <div className="notification-text">
-                            <strong>You have an upcoming event </strong>
-                            <div className="notification-time">
-                              <span>
-                                <strong>{notification.title}</strong> -{" "}
-                                {notification.dateStart} at{" "}
-                                {notification.timeStart}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </NotificationItem>
-                  ))
-                ) : (
-                  <p>No new notifications</p>
-                )}
+                <List>
+                  {notifications.map((notification, index) => (
+                    <div key={index}>
+                      <NotificationListItem notification={notification} />
+                      {index < notifications.length - 1 && <Divider />}
+                    </div>
+                  ))}
+                </List>
               </NotificationBox>
             </Fade>
           </ClickAwayListener>
         )}
       </Popper>
-    </PopupContainer>
+    </div>
   );
 };
 
